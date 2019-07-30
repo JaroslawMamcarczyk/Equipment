@@ -1,0 +1,36 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- JDBC Database connection settings -->
+
+        <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
+        <property name="hibernate.connection.url">jdbc:hsqldb:file:Database</property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+
+        <property name="connection.username">root</property>
+
+        <property name="connection.password">wisla22</property>
+
+        <!-- Select our SQL dialect -->
+
+        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+
+
+        <!-- Echo the SQL to stdout -->
+
+        <property name="show_sql">true</property>
+        <mapping class="product.Product" />
+        <mapping class="product.ProductGroup" />
+
+
+
+    </session-factory>
+
+</hibernate-configuration>
