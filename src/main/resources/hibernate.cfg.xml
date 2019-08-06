@@ -12,7 +12,7 @@
 
         <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
         <property name="hibernate.connection.url">jdbc:hsqldb:file:Database</property>
-        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+        <property name="hibernate.hbm2ddl.auto">validate</property>
 
         <property name="connection.username">root</property>
 
@@ -28,6 +28,8 @@
         <property name="show_sql">true</property>
         <mapping class="product.Product" />
         <mapping class="product.ProductGroup" />
+        <mapping class="building.Building" />
+        <mapping class="building.Room" />
 
 
 

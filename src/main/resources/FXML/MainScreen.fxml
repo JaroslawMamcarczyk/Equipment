@@ -6,20 +6,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorGeneral" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainScreenController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainScreenController">
    <children>
-      <MenuBar layoutY="-2.0" prefHeight="22.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuBar layoutY="-2.0" maxHeight="25.0" prefHeight="25.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Nowy">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Opcje">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
+          <Menu fx:id="menuShowBuilding" mnemonicParsing="false" text="Budynki" />
+            <Menu fx:id="menuEditBuilding" mnemonicParsing="false" text="Edycja budynków" />
           <Menu mnemonicParsing="false" text="Zakończ">
             <items>
               <MenuItem mnemonicParsing="false" text="Zamknij" />
@@ -27,5 +19,6 @@
           </Menu>
         </menus>
       </MenuBar>
+      <AnchorPane fx:id="anchorGeneral" prefHeight="362.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
    </children>
 </AnchorPane>

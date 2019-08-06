@@ -2,6 +2,8 @@ package product;
 
 
 
+
+import building.Room;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -29,7 +31,9 @@ public class Product implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
     private ProductGroup productGroup;
-    //  private Building roomNumber;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
+      private Room roomNumber;
     //private Departament department;
     //private StringProperty category = new SimpleStringProperty();
     @Column
@@ -110,7 +114,15 @@ public class Product implements Serializable {
         this.comments = comments;
     }
 
-    public Product(String productName, String serialNumber, String inventoryNumber, String evidentialNumber, BigDecimal price, int productionYear, ProductGroup productGroup, String comments) {
+    public Room getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(Room roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public Product(String productName, String serialNumber, String inventoryNumber, String evidentialNumber, BigDecimal price, int productionYear, ProductGroup productGroup, String comments, Room room) {
         this.productName = productName;
         this.serialNumber = serialNumber;
         this.inventoryNumber = inventoryNumber;
@@ -119,6 +131,7 @@ public class Product implements Serializable {
         this.productionYear = productionYear;
         this.productGroup = productGroup;
         this.comments = comments;
+        this.roomNumber = room;
     }
 
 }
