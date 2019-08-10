@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="549.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddProductScreenController">
+   <children>
+      <HBox layoutX="14.0" layoutY="14.0" prefHeight="447.0" prefWidth="333.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <VBox prefHeight="390.0" prefWidth="161.0" spacing="5.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="97.0" text="Nazwa" />
+                  <Label prefHeight="31.0" text="Numer Seryjny" />
+                  <Label prefHeight="31.0" text="Numer inwenatryzacyjny" />
+                  <Label prefHeight="31.0" prefWidth="161.0" text="Numer ewidencyjny" />
+                  <Label prefHeight="31.0" prefWidth="158.0" text="Cena" />
+                  <Label prefHeight="31.0" prefWidth="158.0" text="Rok produkcji" />
+                  <Label prefHeight="31.0" text="Grupa produktowa" />
+                  <Label prefHeight="31.0" text="Komentarz" />
+                  <Label prefHeight="31.0" text="Budynek" />
+                  <Label layoutX="10.0" layoutY="298.0" prefHeight="31.0" text="Pokój" />
+                  <Label text="Rodzaj" />
+               </children>
+            </VBox>
+            <VBox prefHeight="447.0" prefWidth="173.0" spacing="5.0">
+               <children>
+                  <TextField fx:id="textName" />
+                  <TextField fx:id="textFieldSerial" />
+                  <TextField fx:id="textFieldinventory" />
+                  <TextField fx:id="textFieldEvidential" />
+                  <TextField fx:id="textFieldPrice" />
+                  <TextField fx:id="textFieldYear" />
+                  <ChoiceBox fx:id="choiceBoxGroup" prefHeight="31.0" prefWidth="173.0" />
+                  <TextField fx:id="textFieldComment" />
+                  <ChoiceBox fx:id="choiceBoxBuilding" prefHeight="31.0" prefWidth="178.0" />
+                  <ChoiceBox fx:id="choiceBoxRoom" prefHeight="31.0" prefWidth="175.0" />
+                  <ChoiceBox fx:id="choiceBoxKinde" prefHeight="31.0" prefWidth="176.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button layoutX="14.0" layoutY="468.0" mnemonicParsing="false" onAction="#clickSaveAndGo" text="Zapisz i wyjdź" AnchorPane.bottomAnchor="50.0" />
+      <Button layoutX="159.0" layoutY="468.0" mnemonicParsing="false" onAction="#clickSaveAndNext" text="Zapisz i dodaj kolejny" AnchorPane.bottomAnchor="50.0" />
+   </children>
+</AnchorPane>

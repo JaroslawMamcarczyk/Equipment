@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane fx:id="gridPaneGeneral" fx:controller="controllers.CalendarScreenController" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Label text="Poniedziałek" alignment="CENTER" />
+      <Label text="Wtorek" GridPane.columnIndex="1" />
+      <Label text="Środa" GridPane.columnIndex="2" />
+      <Label text="Czwartek" GridPane.columnIndex="3" />
+      <Label text="Piątek" GridPane.columnIndex="4" />
+      <Label text="Sobota" GridPane.columnIndex="5" />
+      <Label text="Niedziela" GridPane.columnIndex="6" />
+   </children>
+</GridPane>

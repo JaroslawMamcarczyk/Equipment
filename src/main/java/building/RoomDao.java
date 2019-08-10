@@ -1,5 +1,6 @@
 package building;
 
+import Dao.DBConnect;
 import interfaces.DatabaseDao;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -57,14 +58,7 @@ public class RoomDao implements DatabaseDao {
         DBConnect.closeSession();
         return list;
     }
-    public boolean compareRoom(int x, int y){
-        Boolean result = false;
-        for(Room room:getList()) {
-            if (room.getPositionX() == x && room.getPositionY() == y)
-                result = true;
-        }
-        return result;
-    }
+
 
     public void changePositionX(int x,int id){
         Session session = DBConnect.getSession();

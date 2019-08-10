@@ -1,41 +1,34 @@
-package building;
+package product;
 
 import Dao.DBConnect;
+import building.Room;
 import interfaces.DatabaseDao;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.util.List;
 
+public class ProductGroupDao implements DatabaseDao {
 
-public class BuildingDao implements DatabaseDao {
     @Override
     public void save(Object entity) {
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        session.save(entity);
+        session.persist(entity);
         session.getTransaction().commit();
         DBConnect.closeSession();
     }
 
     @Override
     public void update(Object entity) {
-        Building buildingObject = (Building)entity;
-        Session session = DBConnect.getSession();
-        session.beginTransaction();
-        Query query = session.createQuery("update Building set name=:name where id= :id");
-        query.setParameter("name",buildingObject.getName());
-        query.setParameter("id",buildingObject.getId());
-    query.executeUpdate();
-        session.getTransaction().commit();
-        DBConnect.closeSession();
+
     }
 
     @Override
     public void delete(int id) {
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery("delete from Building where id= :id");
+        Query query = session.createQuery("delete from ProductGroup where id= :id");
         query.setParameter("id",id).executeUpdate();
         session.getTransaction().commit();
         DBConnect.closeSession();
@@ -45,7 +38,7 @@ public class BuildingDao implements DatabaseDao {
     public Object findByYd(int id) {
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery("from Building where id=:id");
+        Query query = session.createQuery(" from ProductGroup  where id=:id");
         query.setParameter("id",id).executeUpdate();
         session.getTransaction().commit();
         DBConnect.closeSession();
@@ -58,12 +51,12 @@ public class BuildingDao implements DatabaseDao {
     }
 
     @Override
-    public  List<Building> getList(){
+    public List getList() {
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM Building ");
+        Query query = session.createQuery("FROM ProductGroup ");
         session.getTransaction().commit();
-        List<Building> list = query.list();
+        List<Room> list = query.list();
         DBConnect.closeSession();
         return list;
     }

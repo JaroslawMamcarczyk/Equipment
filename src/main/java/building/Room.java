@@ -18,6 +18,8 @@ public class Room implements Serializable {
     @Column
     private int positionY;
     @Column
+    private String description;
+    @Column
     @Enumerated(EnumType.STRING)
     private Floor floor;
 
@@ -43,6 +45,14 @@ public class Room implements Serializable {
 
     public String getNumber() {
         return number;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setNumber(String number) {
@@ -96,7 +106,22 @@ public class Room implements Serializable {
         this.positionX = x;
         this.positionY = y;
     }
+    public Room(String number, Floor floor, Building building, int x, int y,String description) {
+        this.number = number;
+        this.floor = floor;
+        this.building = building;
+        this.positionX = x;
+        this.positionY = y;
+        this.description = description;
+    }
     public Room(){
 
     }
+@Override
+    public String toString(){
+        if(description!=null)
+        return number+" "+description;
+        else
+            return number;
+}
 }

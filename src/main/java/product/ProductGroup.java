@@ -34,4 +34,16 @@ public class ProductGroup {
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
+
+    public ProductGroup(String groupName) {
+        this.groupName = groupName;
+    }
+    public ProductGroup(){
+
+    }
+
+    @Override
+    public String toString(){
+        return groupName;
+    }
 }

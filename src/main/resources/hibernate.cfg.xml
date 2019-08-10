@@ -12,7 +12,7 @@
 
         <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
         <property name="hibernate.connection.url">jdbc:hsqldb:file:Database</property>
-        <property name="hibernate.hbm2ddl.auto">validate</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
 
         <property name="connection.username">root</property>
 
@@ -30,6 +30,9 @@
         <mapping class="product.ProductGroup" />
         <mapping class="building.Building" />
         <mapping class="building.Room" />
+        <mapping class="product.ComputerPlatform" />
+        <mapping class="product.ComputerSwitch" />
+        <mapping class="worksToDo.Works" />
 
 
 

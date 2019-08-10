@@ -15,7 +15,8 @@ public class Product implements Serializable {
     @GeneratedValue
     @Column(nullable = false,unique = true)
     private int ProductId;
-  //  private ProductKind kind;
+    @Column
+    private ProductKind kind;
     @Column
     private String productName;
     @Column
@@ -39,7 +40,21 @@ public class Product implements Serializable {
     @Column
     private String comments;
 
+    @OneToOne(cascade= CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn()
+    private ComputerPlatform computerPlatform;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn()
+    private ComputerSwitch computerSwitch;
     public Product() {
+    }
+
+    public enum ProductKind {
+        ŁĄCZNOŚĆ, INFORMATYKA;
+@Override
+        public String toString(){
+            return super.toString().toLowerCase();
+       }
     }
 
     public int getProductId() {
@@ -122,7 +137,15 @@ public class Product implements Serializable {
         this.roomNumber = roomNumber;
     }
 
-    public Product(String productName, String serialNumber, String inventoryNumber, String evidentialNumber, BigDecimal price, int productionYear, ProductGroup productGroup, String comments, Room room) {
+    public ProductKind getKind() {
+        return kind;
+    }
+
+    public void setKind(ProductKind kind) {
+        this.kind = kind;
+    }
+
+    public Product(String productName, String serialNumber, ProductKind productKind, String inventoryNumber, String evidentialNumber, BigDecimal price, int productionYear, ProductGroup productGroup, String comments, Room room) {
         this.productName = productName;
         this.serialNumber = serialNumber;
         this.inventoryNumber = inventoryNumber;
@@ -132,6 +155,7 @@ public class Product implements Serializable {
         this.productGroup = productGroup;
         this.comments = comments;
         this.roomNumber = room;
+        this.kind = productKind;
     }
 
 }

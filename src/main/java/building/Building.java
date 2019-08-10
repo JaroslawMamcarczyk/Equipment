@@ -2,6 +2,7 @@ package building;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -46,6 +47,24 @@ public class Building implements Serializable {
     }
 
     public Building(){
+    }
+    @Override
+    public String toString(){
+        return name;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Building)) return false;
+        Building building = (Building) o;
+        return getId() == building.getId() &&
+                getName().equals(building.getName()) &&
+                Objects.equals(rooms, building.rooms);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), rooms);
     }
 }
