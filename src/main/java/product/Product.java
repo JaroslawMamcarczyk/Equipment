@@ -35,17 +35,17 @@ public class Product implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
       private Room roomNumber;
-    //private Departament department;
-    //private StringProperty category = new SimpleStringProperty();
     @Column
     private String comments;
 
     @OneToOne(cascade= CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn()
-    private ComputerPlatform computerPlatform;
+    @JoinColumn
+    private ComputerDetails computerDetails;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn()
+    @JoinColumn
     private ComputerSwitch computerSwitch;
+    @OneToOne(mappedBy = "productOnSocket")
+    private ComputerSwitch socketFromSwitch;
     public Product() {
     }
 
@@ -158,4 +158,11 @@ public class Product implements Serializable {
         this.kind = productKind;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productName='" + productName + '\'' +
+                ", evidentialNumber='" + evidentialNumber + '\'' +
+                '}';
+    }
 }

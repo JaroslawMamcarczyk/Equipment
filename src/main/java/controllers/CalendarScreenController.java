@@ -8,23 +8,23 @@ import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Separator;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import worksToDo.Works;
 import worksToDo.WorksDao;
-
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
 import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
@@ -33,9 +33,15 @@ import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 public class CalendarScreenController {
     @FXML
     private GridPane gridPaneGeneral;
-    private static BooleanProperty isNewWorks=new SimpleBooleanProperty(false);
+    @FXML
+    private ImageView imageLeftArrow;
+    @FXML
+    private ImageView imageRightArrow;
+    private static BooleanProperty isNewWorks = new SimpleBooleanProperty(false);
     private WorksDao worksDao = new WorksDao();
     private static LocalDate dateToNewScene = null;
+    private Stage newStage = null;
+    private LocalDate localDate = LocalDate.now();
 
     public static LocalDate getDateToNewScene() {
         return dateToNewScene;
@@ -45,7 +51,7 @@ public class CalendarScreenController {
         return isNewWorks.get();
     }
 
-    public static  BooleanProperty isNewWorksProperty() {
+    public static BooleanProperty isNewWorksProperty() {
         return isNewWorks;
     }
 
@@ -54,14 +60,39 @@ public class CalendarScreenController {
     }
 
     @FXML
-     void initialize(){
-    //    gridPaneGeneral.setOnMouseClicked(click->clickGrid(click));
-        List<Works> worksList = new ArrayList<>(worksDao.getList());
-        LocalDate local = LocalDate.now();
-        LocalDate first =local.with(firstDayOfMonth());
-        LocalDate lastDate = local.with(lastDayOfMonth());
-        System.out.println(first.getDayOfWeek());
-        System.out.println(lastDate.getDayOfMonth());
+    void initialize() {
+        Image image = new Image("/Pics/arrowRight.png");
+        Image imageArrow =new Image("/Pics/arrowLeft.png");
+        imageRightArrow.setImage(image);
+        imageLeftArrow.setImage(imageArrow);
+        imageLeftArrow.setOnMouseClicked(click->{
+            Month monthPrevious;
+            Year previousYear;
+            if(localDate.getMonthValue()!=1) {
+                monthPrevious = Month.of(localDate.getMonth().getValue() - 1);
+                previousYear = Year.of(localDate.getYear());
+            }else{
+                monthPrevious = Month.of(12);
+                previousYear = Year.of(localDate.getYear()-1);
+            }
+            clearGridPane();
+            localDate = LocalDate.of(previousYear.getValue(),monthPrevious,1);
+            createCalendar(localDate);
+        });
+        imageRightArrow.setOnMouseClicked(click->{
+            Month monthNext;
+            Year nextYear;
+            if(localDate.getMonthValue()<12) {
+                 monthNext = Month.of(localDate.getMonthValue() + 1);
+                 nextYear = Year.of(localDate.getYear());
+            }else{
+                 monthNext = Month.of(1);
+                 nextYear = Year.of(localDate.getYear()+1);
+            }
+            clearGridPane();
+            localDate = LocalDate.of(nextYear.getValue(),monthNext,1);
+            createCalendar(localDate);
+        });
         ColumnConstraints columnMonday = new ColumnConstraints();
         columnMonday.setHalignment(HPos.CENTER);
         columnMonday.setPercentWidth(16);
@@ -84,116 +115,131 @@ public class CalendarScreenController {
         columnSunday.setPercentWidth(10);
         columnSunday.setHalignment(HPos.CENTER);
         RowConstraints rowConstraintsOne = new RowConstraints();
-        rowConstraintsOne.setPercentHeight(5);
+        rowConstraintsOne.setPercentHeight(2.5);
         rowConstraintsOne.setValignment(VPos.CENTER);
         RowConstraints rowConstraintsTwo = new RowConstraints();
-        rowConstraintsTwo.setPercentHeight(19);
+        rowConstraintsTwo.setPercentHeight(19.5);
         RowConstraints rowConstraintsThree = new RowConstraints();
-        rowConstraintsThree.setPercentHeight(19);
+        rowConstraintsThree.setPercentHeight(19.5);
         RowConstraints rowConstraintsFour = new RowConstraints();
-        rowConstraintsFour.setPercentHeight(19);
+        rowConstraintsFour.setPercentHeight(19.5);
         RowConstraints rowConstraintsFive = new RowConstraints();
-        rowConstraintsFive.setPercentHeight(19);
+        rowConstraintsFive.setPercentHeight(19.5);
         RowConstraints rowConstraintsSix = new RowConstraints();
-        rowConstraintsSix.setPercentHeight(19);
-        gridPaneGeneral.getRowConstraints().addAll(rowConstraintsOne,rowConstraintsTwo,rowConstraintsThree,rowConstraintsFour,rowConstraintsFive,rowConstraintsSix);
-        gridPaneGeneral.getColumnConstraints().addAll(columnMonday,columnThursday,columnWednesday,columnTuesday,columnFriday,columnSaturday,columnSunday);
-        int coly = 1;
-        int colx=getPosition(first.getDayOfWeek());
-        for(int i = 1;i<=lastDate.getDayOfMonth();i++){
-            VBox vBox = new VBox();
-            vBox.setSpacing(5);
-            if(i==local.getDayOfMonth()){
-                vBox.setStyle("-fx-border-width: 5;-fx-border-color: red");
-            }
-            LocalDate calendarDate = LocalDate.of(local.getYear(),local.getMonth(),i);
-            Text label = new Text(calendarDate.toString());
-            label.setStyle("-fx-font-weight: bold");
-            vBox.getChildren().add(label);
-            for(Works works:worksList){
-                if(works.getDate().equals(calendarDate)){
-                    Text worksLabel = new Text(works.getWork());
-                    worksLabel.setStyle("-fx-font-size: 20");
-                    HBox hBox = new HBox();
-                    hBox.setSpacing(5);
-                    hBox.getChildren().add(worksLabel);
-                    if(works.isDone()){
-                        worksLabel.setStyle("-fx-strikethrough: true");
-                    }else {
-                        Button button = new Button("wykonano");
-                        button.setOnMouseClicked(click -> {
-                            worksDao.setWorkDoing(works.getId());
-                        });
-                        hBox.getChildren().add(button);
-                    }
-                    vBox.getChildren().add(hBox);
-                }
-            }
-            vBox.setOnMouseClicked(click->{
-                clickGrid(click,calendarDate);
-            });
-            gridPaneGeneral.add(vBox,colx,coly);
-            colx++;
-            if(colx==7){
-                colx=0;
-                coly++;
-            }
-
-        }
+        rowConstraintsSix.setPercentHeight(19.5);
+        gridPaneGeneral.getRowConstraints().addAll(rowConstraintsOne, rowConstraintsTwo, rowConstraintsThree, rowConstraintsFour, rowConstraintsFive, rowConstraintsSix);
+        gridPaneGeneral.getColumnConstraints().addAll(columnMonday, columnThursday, columnWednesday, columnTuesday, columnFriday, columnSaturday, columnSunday);
+        createCalendar(LocalDate.now());
         isNewWorks.addListener(observable -> {
-            if(isNewWorks.get()) {
-                System.out.println(worksDao.getList().get(0));
+            if (isNewWorks.get()) {
+                createCalendar(localDate);
                 isNewWorks.setValue(false);
             }
         });
     }
 
-    private int getPosition(DayOfWeek day){
-        int position=0;
-        switch (day){
+    private void clearGridPane() {
+        Set<Node> deleteNodes = new HashSet<>();
+        for (Node child:gridPaneGeneral.getChildren()){
+            Integer rowIndex = gridPaneGeneral.getRowIndex(child);
+            if(rowIndex!=null ){
+                deleteNodes.add(child);
+            }
+        }
+        gridPaneGeneral.getChildren().removeAll(deleteNodes);
+    }
+
+    private void createCalendar(LocalDate currentDate) {
+        //List<Works> worksList = new ArrayList<>(worksDao.getList());
+        LocalDate firstDayOfMonth = currentDate.with(firstDayOfMonth());
+        LocalDate lastDateOfMonth = currentDate.with(lastDayOfMonth());
+        int coly = 1;
+        int colx = getPosition(firstDayOfMonth.getDayOfWeek());
+        for (int i = 1; i <= lastDateOfMonth.getDayOfMonth(); i++) {
+            VBox vBox = new VBox();
+            vBox.setSpacing(5);
+            if (i == currentDate.getDayOfMonth()&&currentDate.getMonthValue()==LocalDate.now().getMonthValue()&&currentDate.getYear()==LocalDate.now().getYear()) {
+                vBox.setStyle("-fx-border-width: 5;-fx-border-color: red");
+            }
+            LocalDate calendarDate = LocalDate.of(currentDate.getYear(), currentDate.getMonth(), i);
+            Text label = new Text(calendarDate.toString());
+            label.setStyle("-fx-font-weight: bold");
+            vBox.getChildren().add(label);
+            for (Works works : worksDao.getList()) {
+                if (works.getDate().equals(calendarDate)) {
+                    Text worksLabel = new Text(works.getWork());
+                    if (works.isDone()) {
+                        worksLabel.setStyle("-fx-strikethrough: true");
+                    }
+                    Separator separator = new Separator();
+                    vBox.getChildren().addAll(worksLabel,separator);
+                }
+            }
+            vBox.setOnMouseClicked(click -> {
+                if(newStage==null) {
+                    newStage = clickGrid(click, calendarDate);
+                }else{
+                    newStage.close();
+                    newStage = clickGrid(click, calendarDate);
+                }
+            });
+            gridPaneGeneral.add(vBox, colx, coly);
+            colx++;
+            if (colx == 7) {
+                colx = 0;
+                coly++;
+            }
+
+        }
+    }
+
+    private int getPosition(DayOfWeek day) {
+        int position = 0;
+        switch (day) {
             case MONDAY: {
-                position=0;
+                position = 0;
                 break;
             }
-            case TUESDAY:{
-                position=1;
+            case TUESDAY: {
+                position = 1;
                 break;
             }
             case WEDNESDAY: {
-                position=2;
+                position = 2;
                 break;
             }
             case THURSDAY: {
-                position=3;
+                position = 3;
                 break;
             }
             case FRIDAY: {
-                position=4;
+                position = 4;
                 break;
             }
             case SATURDAY: {
-                position=5;
+                position = 5;
                 break;
             }
             case SUNDAY: {
-                position=6;
+                position = 6;
                 break;
             }
         }
         return position;
     }
 
-    public void clickGrid(javafx.scene.input.MouseEvent event, LocalDate date) {
+    public Stage clickGrid(javafx.scene.input.MouseEvent event, LocalDate date) {
+        dateToNewScene = date;
         Stage stage = new Stage();
-        AnchorPane anchorPane = null;
-        try {
-            anchorPane = FXMLLoader.load(getClass().getResource("/FXML/DetailsCalendarScreen.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
+            AnchorPane anchorPane = null;
+            try {
+                anchorPane = FXMLLoader.load(getClass().getResource("/FXML/DetailsCalendarScreen.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            stage.setScene(new Scene(anchorPane, 400, 400));
+            stage.setTitle(date.toString());
+            stage.show();
+            return stage;
         }
-        dateToNewScene=date;
-        stage.setScene(new Scene(anchorPane,400,400));
-        stage.setTitle(date.toString());
-        stage.show();
-    }
     }

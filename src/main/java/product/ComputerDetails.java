@@ -1,15 +1,19 @@
 package product;
 
+import policeman.Worker;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table
-public class ComputerPlatform implements Serializable {
+public class ComputerDetails implements Serializable {
     @Id
     @GeneratedValue
     @Column(nullable = false,unique = true)
     private int id;
+    @Column
+    private ComputerType type;
     @Column
     private String ip;
     @Column
@@ -17,9 +21,14 @@ public class ComputerPlatform implements Serializable {
     @Column
     private String gateway;
     @Column
-    private String user;
-    @Column
     private String socket;
-    @OneToOne(mappedBy = "computerPlatform")
+    @OneToOne(mappedBy = "computerDetails")
     private Product product;
+    @OneToOne
+    @JoinColumn
+    private Worker worker;
+
+    public enum ComputerType {
+        PLATFORMA,KSIP,SNP,ODN,MASZYNA,OPERACYJNY;
+    }
 }

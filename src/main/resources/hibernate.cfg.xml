@@ -30,9 +30,13 @@
         <mapping class="product.ProductGroup" />
         <mapping class="building.Building" />
         <mapping class="building.Room" />
-        <mapping class="product.ComputerPlatform" />
+        <mapping class="product.ComputerDetails" />
         <mapping class="product.ComputerSwitch" />
         <mapping class="worksToDo.Works" />
+        <mapping class="policeman.Department" />
+        <mapping class="policeman.Rank" />
+        <mapping class="policeman.Worker" />
+        <mapping class="policeman.Range" />
 
 
 

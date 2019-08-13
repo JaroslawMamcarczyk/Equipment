@@ -10,18 +10,32 @@
    <children>
       <MenuBar layoutY="-2.0" maxHeight="25.0" prefHeight="25.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
         <menus>
-          <Menu fx:id="menuShowBuilding" mnemonicParsing="false" text="Budynki" />
-            <Menu fx:id="menuEditBuilding" mnemonicParsing="false" text="Edycja budynków" />
+            <Menu mnemonicParsing="false" text="Policjanci">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#clickShowPoliceman" text="Pokaż wszystkich" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickAddPoliceman" text="Dodaj nowego" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Budynki">
+               <items>
+                  <Menu fx:id="menuShowBuilding" mnemonicParsing="false" text="Pokaż budynki" />
+                  <Menu fx:id="menuEditBuilding" mnemonicParsing="false" text="Edycja budynków" />
+               </items></Menu>
+            <Menu mnemonicParsing="false" text="Sprzęt">
+              <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clickShowAllEquipment" text="Pokaż Cały sprzęt" />
+                <MenuItem fx:id="menuItemAddProduct" mnemonicParsing="false" text="Dodaj Sprzęt" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickShowPlatform" text="Pokaż Komputery Platformowe" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickShowKsip" text="Pokaż Komputery KSIP" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickShowSwitch" text="Pokaż Switche" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" onAction="#clickCalendar" text="Kalendarz" />
           <Menu mnemonicParsing="false" text="Zakończ">
             <items>
               <MenuItem mnemonicParsing="false" text="Zamknij" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Produkt">
-              <items>
-                <MenuItem fx:id="menuItemAddProduct" mnemonicParsing="false" text="Dodaj" />
-              </items>
-            </Menu>
         </menus>
       </MenuBar>
       <AnchorPane fx:id="anchorGeneral" prefHeight="362.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />

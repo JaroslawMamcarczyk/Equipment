@@ -1,4 +1,4 @@
-package controllers;
+package controllers.product;
 import building.Building;
 import building.BuildingDao;
 import building.Room;
@@ -9,14 +9,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import product.Product;
 import product.ProductDao;
 import product.ProductGroup;
 import product.ProductGroupDao;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Optional;
 
@@ -43,8 +47,12 @@ public class AddProductScreenController {
     private TextField textFieldComment;
     @FXML
     private ChoiceBox<ProductGroup> choiceBoxGroup;
+    @FXML
+    private AnchorPane anchorDetails;
     private     ProductGroupDao productGroupDao = new ProductGroupDao();
     private BooleanProperty isNewProductgroup = new SimpleBooleanProperty(false);
+    private static Product productToSave = null;
+    public static Product getProductToSave(){return productToSave;}
 
     @FXML
     void initialize(){
@@ -93,8 +101,18 @@ public class AddProductScreenController {
     @FXML
     void clickSaveAndGo(ActionEvent event) {
         ProductDao productDao = new ProductDao();
+        VBox vBox = null;
         Product product = new Product(textName.getText(),textFieldSerial.getText(),choiceBoxKinde.getValue(),textFieldinventory.getText(),textFieldEvidential.getText(),new BigDecimal(textFieldPrice.getText()),Integer.parseInt(textFieldYear.getText()),choiceBoxGroup.getValue(),textFieldComment.getText(),choiceBoxRoom.getValue());
         productDao.save(product);
+        productToSave = product;
+        if (choiceBoxGroup.getValue().getGroupName().equals("Switch")){
+            try {
+                 vBox = FXMLLoader.load(getClass().getResource("/FXML/product/AddSwitchScreen.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        anchorDetails.getChildren().add(vBox);
     }
 
     @FXML

@@ -3,6 +3,7 @@ package controllers;
 import building.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -34,10 +35,9 @@ public class MainScreenController {
                 isNewBuilding.set(false);
             }
         });
-        menuItemAddProduct.setOnAction(click-> createCenterPane("/FXML/AddProductScreen.fxml"));
+        menuItemAddProduct.setOnAction(click-> createCenterPane("/FXML/product/AddProductScreen.fxml"));
 
-        createCenterPane("/FXML/CalendarScreen.fxml");
-        //       Room room = new Room("2", Room.Floor.PARTER,building,1,1);
+       // createCenterPane("/FXML/CalendarScreen.fxml");
         RoomDao roomDao = new RoomDao();
         createMenuBuilding(buildingDao);
 
@@ -94,5 +94,36 @@ public class MainScreenController {
             return kindOfbuilding;
         }
 
+    @FXML
+    void clickShowPoliceman(ActionEvent event) {
+createCenterPane("/FXML/ShowPolicemanScreen.fxml");
+    }
 
+    @FXML
+    void clickAddPoliceman(ActionEvent event){
+        createCenterPane("/FXML/AddPolicemanScreen.fxml");
+    }
+
+    @FXML
+    void clickCalendar(ActionEvent event){
+        createCenterPane("/FXML/CalendarScreen.fxml");
+    }
+
+    @FXML
+    void clickShowPlatform(){
+
+    }
+    @FXML
+    void clickShowKsip(){
+
+    }
+    @FXML
+    void clickShowSwitch(){
+        createCenterPane("/FXML/product/SwitchScreen.fxml");
+    }
+
+    @FXML
+    void clickShowAllEquipment(){
+
+    }
 }

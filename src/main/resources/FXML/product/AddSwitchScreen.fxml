@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="vBoxGeneral" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="360.0" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.product.AddSwitchScreenController">
+   <children>
+      <HBox prefHeight="61.0" prefWidth="360.0" spacing="10.0">
+         <children>
+            <Label text="Podaj nazwę Switcha">
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="textFieldSwitch" prefHeight="30.0" prefWidth="188.0">
+               <HBox.margin>
+                  <Insets right="5.0" top="10.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox prefHeight="49.0" prefWidth="360.0" spacing="10.0">
+         <children>
+            <Label prefHeight="31.0" prefWidth="138.0" text="Podaj ilość gniazd">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="textFieldSocket" prefHeight="30.0" prefWidth="188.0">
+               <HBox.margin>
+                  <Insets right="5.0" top="10.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </TextField>
+         </children>
+      </HBox>
+      <Button mnemonicParsing="false" onAction="#clickSaveSwitch" prefHeight="31.0" prefWidth="362.0" text="Zapisz" />
+   </children>
+</VBox>

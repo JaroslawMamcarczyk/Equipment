@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="549.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddProductScreenController">
+<AnchorPane prefHeight="549.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.product.AddProductScreenController">
    <children>
       <HBox layoutX="14.0" layoutY="14.0" prefHeight="447.0" prefWidth="333.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -44,5 +44,6 @@
       </HBox>
       <Button layoutX="14.0" layoutY="468.0" mnemonicParsing="false" onAction="#clickSaveAndGo" text="Zapisz i wyjdź" AnchorPane.bottomAnchor="50.0" />
       <Button layoutX="159.0" layoutY="468.0" mnemonicParsing="false" onAction="#clickSaveAndNext" text="Zapisz i dodaj kolejny" AnchorPane.bottomAnchor="50.0" />
+      <AnchorPane fx:id="anchorDetails" layoutX="354.0" layoutY="14.0" prefHeight="529.0" prefWidth="239.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
    </children>
 </AnchorPane>

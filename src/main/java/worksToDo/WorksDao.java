@@ -5,6 +5,9 @@ import org.hibernate.Session;
 import Dao.DBConnect;
 import org.hibernate.query.Query;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
 import java.util.List;
 
 public class WorksDao implements DatabaseDao {
@@ -50,7 +53,7 @@ public class WorksDao implements DatabaseDao {
     }
 
     @Override
-    public List getList() {
+    public List<Works> getList() {
         Session session = DBConnect.getSession();
         session.beginTransaction();
         Query query = session.createQuery("FROM Works ");
@@ -68,4 +71,15 @@ public class WorksDao implements DatabaseDao {
         session.getTransaction().commit();
         DBConnect.closeSession();
     }
+
+    public List<Works> getMonthlyWorksList(Month monthy){
+Session session = DBConnect.getSession();
+session.beginTransaction();
+Query query = session.createQuery("from Works so  where Year(so.date)=:month");
+query.setParameter("month", LocalDate.now().getYear()).executeUpdate();
+session.getTransaction().commit();
+List<Works> list = query.list();
+DBConnect.closeSession();
+return list;
+    };
 }
