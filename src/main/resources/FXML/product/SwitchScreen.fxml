@@ -6,15 +6,33 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.product.SwitchScreenController">
+<AnchorPane prefHeight="743.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.product.SwitchScreenController">
    <children>
-      <HBox fx:id="hBoxTitle" layoutX="14.0" layoutY="8.0" prefHeight="66.0" prefWidth="590.0" AnchorPane.bottomAnchor="326.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="8.0" />
-      <TableView fx:id="tableSwitch" layoutX="20.0" layoutY="86.0" prefHeight="309.0" prefWidth="360.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="85.0">
-        <columns>
-          <TableColumn fx:id="columnSocket" prefWidth="75.0" text="Port" />
-          <TableColumn fx:id="columnEquipment" prefWidth="170.0" text="Sprzęt" />
-            <TableColumn fx:id="columnType" prefWidth="114.0" text="Typ" />
-        </columns>
-      </TableView>
+      <HBox fx:id="hBoxTitle" layoutX="14.0" layoutY="8.0" prefHeight="77.0" prefWidth="1356.0" AnchorPane.bottomAnchor="658.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="8.0" />
+      <HBox layoutX="145.0" layoutY="98.0" prefHeight="127.0" prefWidth="336.0" spacing="50.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="88.0">
+         <children>
+             <TableView fx:id="tableSwitch" prefHeight="127.0" prefWidth="410.0">
+                 <columns>
+                     <TableColumn fx:id="columnSocket" prefWidth="50.0" text="Port" />
+                     <TableColumn fx:id="columnEquipment" prefWidth="200.0" text="Sprzęt" />
+                     <TableColumn fx:id="columnType" prefWidth="109.0" text="Typ" />
+                 </columns>
+             </TableView>
+            <TableView fx:id="tableSwitch2" prefHeight="127.0" prefWidth="410.0">
+              <columns>
+                <TableColumn fx:id="columnSocket2" prefWidth="75.0" text="Port" />
+                <TableColumn fx:id="columnEquipment2" prefWidth="83.0" text="Sprzęt" />
+                  <TableColumn fx:id="columnType2" prefWidth="150.0" text="Typ" />
+              </columns>
+            </TableView>
+             <TableView fx:id="tableSwitch3" prefHeight="127.0" prefWidth="410.0">
+                 <columns>
+                     <TableColumn fx:id="columnSocket3" prefWidth="75.0" text="Port" />
+                     <TableColumn fx:id="columnEquipment3" prefWidth="83.0" text="Sprzęt" />
+                     <TableColumn fx:id="columnType3" prefWidth="150.0" text="Typ" />
+                 </columns>
+             </TableView>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

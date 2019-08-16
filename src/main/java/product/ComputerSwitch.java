@@ -77,8 +77,7 @@ private String socket;
         return getId() == that.getId() &&
                 Objects.equals(getSwitchName(), that.getSwitchName()) &&
                 Objects.equals(getSocket(), that.getSocket()) &&
-                Objects.equals(getProduct(), that.getProduct()) &&
-                Objects.equals(getProductOnSocket(), that.getProductOnSocket());
+                Objects.equals(getProduct(), that.getProduct());
     }
 
     @Override

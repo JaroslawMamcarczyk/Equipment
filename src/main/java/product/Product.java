@@ -145,6 +145,14 @@ public class Product implements Serializable {
         this.kind = kind;
     }
 
+    public ComputerSwitch getSocketFromSwitch() {
+        return socketFromSwitch;
+    }
+
+    public void setSocketFromSwitch(ComputerSwitch socketFromSwitch) {
+        this.socketFromSwitch = socketFromSwitch;
+    }
+
     public Product(String productName, String serialNumber, ProductKind productKind, String inventoryNumber, String evidentialNumber, BigDecimal price, int productionYear, ProductGroup productGroup, String comments, Room room) {
         this.productName = productName;
         this.serialNumber = serialNumber;
@@ -160,9 +168,6 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "productName='" + productName + '\'' +
-                ", evidentialNumber='" + evidentialNumber + '\'' +
-                '}';
+        return productName+" "+evidentialNumber;
     }
 }

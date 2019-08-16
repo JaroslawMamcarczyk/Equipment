@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.configuration.ConfigurationDepartmentScreenController">
+   <children>
+      <TableView fx:id="tableViewDepartment" layoutX="21.0" layoutY="88.0" prefHeight="564.0" prefWidth="261.0">
+        <columns>
+          <TableColumn fx:id="columnId" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="columnDepartment" prefWidth="75.0" text="Wydział" />
+            <TableColumn fx:id="columnShortName" prefWidth="75.0" text="Skrót" />
+        </columns>
+      </TableView>
+      <Button layoutX="108.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickAddDepartment" text="Dodaj" />
+      <TableView fx:id="tableRank" layoutX="389.0" layoutY="88.0" prefHeight="570.0" prefWidth="261.0">
+        <columns>
+          <TableColumn fx:id="columnIdRank" prefWidth="75.0" text="C1" />
+          <TableColumn fx:id="columnRank" prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <Button layoutX="487.0" layoutY="658.0" mnemonicParsing="false" onAction="#clickAddRank" text="Dodaj" />
+      <Label layoutX="21.0" layoutY="23.0" prefHeight="49.0" prefWidth="261.0" text="Wydziały" />
+      <Label layoutX="382.0" layoutY="27.0" prefHeight="49.0" prefWidth="261.0" text="Stanowiska" />
+   </children>
+</AnchorPane>

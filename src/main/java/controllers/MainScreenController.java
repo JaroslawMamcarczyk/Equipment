@@ -24,6 +24,8 @@ public class MainScreenController {
     private Menu menuShowBuilding;
     @FXML
     private MenuItem menuItemAddProduct;
+    @FXML
+    private Menu menuConfiguration;
     private static Building kindOfbuilding = null;
     private BooleanProperty isNewBuilding = new SimpleBooleanProperty(false);
 
@@ -36,11 +38,9 @@ public class MainScreenController {
             }
         });
         menuItemAddProduct.setOnAction(click-> createCenterPane("/FXML/product/AddProductScreen.fxml"));
-
-       // createCenterPane("/FXML/CalendarScreen.fxml");
         RoomDao roomDao = new RoomDao();
         createMenuBuilding(buildingDao);
-
+       // createCenterPane("/FXML/CalendarScreen.fxml");
     }
 
     private void createMenuBuilding(BuildingDao buildingDao) {
@@ -105,11 +105,6 @@ createCenterPane("/FXML/ShowPolicemanScreen.fxml");
     }
 
     @FXML
-    void clickCalendar(ActionEvent event){
-        createCenterPane("/FXML/CalendarScreen.fxml");
-    }
-
-    @FXML
     void clickShowPlatform(){
 
     }
@@ -124,6 +119,12 @@ createCenterPane("/FXML/ShowPolicemanScreen.fxml");
 
     @FXML
     void clickShowAllEquipment(){
+createCenterPane("/FXML/product/ProductScreen.fxml");
+    }
 
+    @FXML
+    void clickConfiguration(){
+        System.out.println("Dzoalajkurwa");
+        createCenterPane("/FXML/ConfigurationDepartmentScreen.fxml");
     }
 }

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.policeman;
 
 
 import javafx.beans.property.BooleanProperty;

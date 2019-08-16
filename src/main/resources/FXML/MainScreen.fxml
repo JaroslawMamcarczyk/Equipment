@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainScreenController">
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainScreenController">
    <children>
       <MenuBar layoutY="-2.0" maxHeight="25.0" prefHeight="25.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
         <menus>
@@ -30,7 +30,11 @@
                   <MenuItem mnemonicParsing="false" onAction="#clickShowSwitch" text="Pokaż Switche" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" onAction="#clickCalendar" text="Kalendarz" />
+            <Menu  mnemonicParsing="false" text="Konfiguracja">
+            <items>
+                <MenuItem mnemonicParsing="false" onAction="#clickConfiguration" text="Konfiguracja Departamentów" />
+            </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Zakończ">
             <items>
               <MenuItem mnemonicParsing="false" text="Zamknij" />

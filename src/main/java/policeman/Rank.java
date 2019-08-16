@@ -11,7 +11,7 @@ import java.util.Set;
 @Table
 public class Rank implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, unique = true)
     private int ranksId;
     @Column

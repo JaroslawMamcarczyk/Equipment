@@ -5,6 +5,8 @@ import interfaces.DatabaseDao;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import product.ComputerSwitch;
+import product.Product;
+
 import java.util.List;
 
 public class SwitchDao implements DatabaseDao {
@@ -67,5 +69,16 @@ public class SwitchDao implements DatabaseDao {
         List<ComputerSwitch> list = query.list();
         DBConnect.closeSession();
         return list;
+    }
+
+    public void saveproductOnSocket(Product product, ComputerSwitch computerSwitch){
+        Session session = DBConnect.getSession();
+        session.beginTransaction();
+        Query query = session.createQuery("UPDATE ComputerSwitch set productOnSocket=:product where id=:id");
+        query.setParameter("product", product);
+        query.setParameter("id", computerSwitch.getId());
+        query.executeUpdate();
+        session.getTransaction().commit();
+        DBConnect.closeSession();
     }
 }

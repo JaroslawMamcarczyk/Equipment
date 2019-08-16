@@ -15,6 +15,8 @@ public class Department implements Serializable {
     private int id;
     @Column
     private String departmentName;
+    @Column
+    private String departmentShort;
     @OneToMany(mappedBy = "department")
     private Set<Rank> ranks;
     @OneToMany(mappedBy = "policemanDepartment")
@@ -53,7 +55,16 @@ public class Department implements Serializable {
         this.workers = workers;
     }
 
-    public Department(String departmentName) {
+    public String getDepartmentShort() {
+        return departmentShort;
+    }
+
+    public void setDepartmentShort(String departmentShort) {
+        this.departmentShort = departmentShort;
+    }
+
+    public Department(String departmentName, String departmentShort) {
+        this.departmentShort = departmentShort;
         this.departmentName = departmentName;
     }
 
@@ -62,6 +73,7 @@ public class Department implements Serializable {
 
     @Override
     public boolean equals(Object o) {
+
         if (this == o) return true;
         if (!(o instanceof Department)) return false;
         Department that = (Department) o;
