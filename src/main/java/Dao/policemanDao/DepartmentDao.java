@@ -20,17 +20,16 @@ public class DepartmentDao implements DatabaseDao {
 
     @Override
     public void update(Object entity) {
-//        ComputerSwitch computerSwitch = (ComputerSwitch) entity;
-//        Session session = DBConnect.getSession();
-//        session.beginTransaction();
-//        Query query = session.createQuery("UPDATE ComputerSwitch set switchName=: name, socket=:socket where id=:id");
-//        query.setParameter("name", computerSwitch.getSwitchName());
-//        query.setParameter("socket",computerSwitch.getSocket());
-//        query.setParameter("id",computerSwitch.getId());
-//        query.executeUpdate();
-//        session.getTransaction().commit();
-//        DBConnect.closeSession();
-
+    Department department = (Department) entity;
+        Session session = DBConnect.getSession();
+        session.beginTransaction();
+        Query query = session.createQuery("UPDATE Department  set departmentName=: name, departmentShort=:short where id=:id");
+        query.setParameter("name", department.getDepartmentName());
+        query.setParameter("short", department.getDepartmentShort());
+        query.setParameter("id",department.getId());
+        query.executeUpdate();
+        session.getTransaction().commit();
+        DBConnect.closeSession();
     }
 
     @Override

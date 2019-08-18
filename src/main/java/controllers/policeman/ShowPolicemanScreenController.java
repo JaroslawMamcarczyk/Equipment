@@ -15,6 +15,8 @@ import java.util.List;
 
 public class ShowPolicemanScreenController {
     @FXML
+    private TableColumn<Worker,Integer> idColumn;
+    @FXML
     private TableColumn<Worker, String> nameColumn;
     @FXML
     private TableColumn<Worker, String> peselColumn;
@@ -23,7 +25,7 @@ public class ShowPolicemanScreenController {
     @FXML
     private TableColumn<Worker, String> surrnameColumn;
     @FXML
-    private TableColumn<Worker, String> idColumn;
+    private TableColumn<Worker, String> identityColumn;
     @FXML
     private TableColumn<Worker, String> standingColumn;
     @FXML
@@ -123,9 +125,10 @@ public class ShowPolicemanScreenController {
 
     public void setPolicemanTableView(ObservableList<Worker> glist) {
         policemanTableView.setItems(glist);
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         surrnameColumn.setCellValueFactory(new PropertyValueFactory<>("surrname"));
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("ewidential"));
+        identityColumn.setCellValueFactory(new PropertyValueFactory<>("ewidential"));
         peselColumn.setCellValueFactory(new PropertyValueFactory<>("pesel"));
         standingColumn.setCellValueFactory(new PropertyValueFactory<>("namePoliceDepartament"));
     }

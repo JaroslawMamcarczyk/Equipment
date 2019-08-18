@@ -1,5 +1,8 @@
 package policeman;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,15 +13,17 @@ import java.util.Set;
 @Table
 public class Department implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false,unique = true)
     private int id;
     @Column
     private String departmentName;
     @Column
     private String departmentShort;
-    @OneToMany(mappedBy = "department")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
     private Set<Rank> ranks;
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @OneToMany(mappedBy = "policemanDepartment")
     private Set<Worker> workers;
 
@@ -78,9 +83,7 @@ public class Department implements Serializable {
         if (!(o instanceof Department)) return false;
         Department that = (Department) o;
         return getId() == that.getId() &&
-                getDepartmentName().equals(that.getDepartmentName()) &&
-                Objects.equals(getRanks(), that.getRanks()) &&
-                Objects.equals(getWorkers(), that.getWorkers());
+                getDepartmentName().equals(that.getDepartmentName());
     }
 
     @Override

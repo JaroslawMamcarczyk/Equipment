@@ -11,12 +11,12 @@ import java.util.Set;
 @Table
 public class Rank implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
     private int ranksId;
     @Column
     private String nameRanks;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Department department;
     @OneToMany(mappedBy = "policemanRank")
     private Set<Worker> workers;
@@ -73,5 +73,10 @@ public class Rank implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getRanksId(), getNameRanks(), getDepartment());
+    }
+
+    @Override
+    public String toString(){
+        return nameRanks+"("+department.getDepartmentShort()+")";
     }
 }

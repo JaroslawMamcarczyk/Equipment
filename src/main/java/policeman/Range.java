@@ -9,7 +9,7 @@ import java.util.Set;
 @Table
 public class Range implements Serializable {
 @Id
-@GeneratedValue
+@GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(nullable = false,unique = true)
 private int id;
 @Column

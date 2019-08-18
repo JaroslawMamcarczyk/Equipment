@@ -20,16 +20,15 @@ public class RankDao implements DatabaseDao {
 
     @Override
     public void update(Object entity) {
-//        ComputerSwitch computerSwitch = (ComputerSwitch) entity;
-//        Session session = DBConnect.getSession();
-//        session.beginTransaction();
-//        Query query = session.createQuery("UPDATE ComputerSwitch set switchName=: name, socket=:socket where id=:id");
-//        query.setParameter("name", computerSwitch.getSwitchName());
-//        query.setParameter("socket",computerSwitch.getSocket());
-//        query.setParameter("id",computerSwitch.getId());
-//        query.executeUpdate();
-//        session.getTransaction().commit();
-//        DBConnect.closeSession();
+    Rank rank = (Rank) entity;
+        Session session = DBConnect.getSession();
+        session.beginTransaction();
+        Query query = session.createQuery("UPDATE Rank set nameRanks=: name where id=:id");
+        query.setParameter("name", rank.getNameRanks());
+         query.setParameter("id",rank.getRanksId());
+        query.executeUpdate();
+        session.getTransaction().commit();
+        DBConnect.closeSession();
 
     }
 
@@ -63,7 +62,7 @@ public class RankDao implements DatabaseDao {
     public List<Rank> getList() {
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM Department ");
+        Query query = session.createQuery("FROM Rank ");
         session.getTransaction().commit();
         List<Rank> list = query.list();
         DBConnect.closeSession();

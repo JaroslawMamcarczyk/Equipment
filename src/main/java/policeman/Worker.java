@@ -10,7 +10,7 @@ import java.util.Objects;
 @Table
 public class Worker implements Serializable {
 @Id
-@GeneratedValue
+@GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(unique = true, nullable = false)
     private int id;
 @Column

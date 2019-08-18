@@ -15,15 +15,25 @@
             <TableColumn fx:id="columnShortName" prefWidth="75.0" text="Skrót" />
         </columns>
       </TableView>
-      <Button layoutX="108.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickAddDepartment" text="Dodaj" />
-      <TableView fx:id="tableRank" layoutX="389.0" layoutY="88.0" prefHeight="570.0" prefWidth="261.0">
+      <Button layoutX="21.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickAddDepartment" text="Dodaj" />
+      <TableView fx:id="tableRank" layoutX="389.0" layoutY="88.0" prefHeight="564.0" prefWidth="261.0">
         <columns>
-          <TableColumn fx:id="columnIdRank" prefWidth="75.0" text="C1" />
-          <TableColumn fx:id="columnRank" prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="columnIdRank" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="columnRank" prefWidth="75.0" text="Stanowisko" />
         </columns>
       </TableView>
-      <Button layoutX="487.0" layoutY="658.0" mnemonicParsing="false" onAction="#clickAddRank" text="Dodaj" />
+      <Button layoutX="389.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickAddRank" text="Dodaj" />
       <Label layoutX="21.0" layoutY="23.0" prefHeight="49.0" prefWidth="261.0" text="Wydziały" />
       <Label layoutX="382.0" layoutY="27.0" prefHeight="49.0" prefWidth="261.0" text="Stanowiska" />
+      <Button layoutX="119.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickEditDepartment" text="Edytuj" />
+      <Button layoutX="217.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickCancelDepartment" text="Anuluj" />
+      <Button layoutX="587.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickCancelRank" text="Anuluj" />
+      <Button layoutX="489.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickEditRank" text="Edytuj" />
+      <TableView layoutX="753.0" layoutY="88.0" prefHeight="564.0" prefWidth="569.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

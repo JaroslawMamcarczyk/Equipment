@@ -9,9 +9,10 @@
       <TableView id="tablePoliceman" fx:id="policemanTableView" layoutX="14.0" layoutY="79.0" prefHeight="656.0" prefWidth="836.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="354.0" AnchorPane.topAnchor="100.0">
           <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"></TableView></columnResizePolicy>
           <columns>
+              <TableColumn fx:id="idColumn" prefWidth="30.0" text="ID" />
           <TableColumn id="nameColumn" fx:id="nameColumn" prefWidth="118.0" text="Imię" />
           <TableColumn id="surnameColumn" fx:id="surrnameColumn" prefWidth="198.0" text="Nazwisko" />
-            <TableColumn fx:id="idColumn" prefWidth="83.0" text="ID" />
+            <TableColumn fx:id="identityColumn" prefWidth="83.0" text="Ewidencyjny" />
             <TableColumn fx:id="peselColumn" prefWidth="141.0" text="Pesel" />
             <TableColumn fx:id="standingColumn" prefWidth="258.0" text="Wydział" />
         </columns>
