@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.configuration.ConfigurationDepartmentScreenController">
    <children>
-      <TableView fx:id="tableViewDepartment" layoutX="21.0" layoutY="88.0" prefHeight="564.0" prefWidth="261.0">
+      <TableView fx:id="tableViewDepartment" layoutX="21.0" layoutY="88.0" prefHeight="564.0" prefWidth="227.0">
         <columns>
           <TableColumn fx:id="columnId" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="columnDepartment" prefWidth="75.0" text="Wydział" />
@@ -16,24 +16,34 @@
         </columns>
       </TableView>
       <Button layoutX="21.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickAddDepartment" text="Dodaj" />
-      <TableView fx:id="tableRank" layoutX="389.0" layoutY="88.0" prefHeight="564.0" prefWidth="261.0">
+      <TableView fx:id="tableRank" layoutX="310.0" layoutY="88.0" prefHeight="564.0" prefWidth="203.0">
         <columns>
           <TableColumn fx:id="columnIdRank" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="columnRank" prefWidth="75.0" text="Stanowisko" />
         </columns>
       </TableView>
-      <Button layoutX="389.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickAddRank" text="Dodaj" />
+      <Button layoutX="310.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickAddRank" text="Dodaj" />
       <Label layoutX="21.0" layoutY="23.0" prefHeight="49.0" prefWidth="261.0" text="Wydziały" />
-      <Label layoutX="382.0" layoutY="27.0" prefHeight="49.0" prefWidth="261.0" text="Stanowiska" />
-      <Button layoutX="119.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickEditDepartment" text="Edytuj" />
-      <Button layoutX="217.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickCancelDepartment" text="Anuluj" />
-      <Button layoutX="587.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickCancelRank" text="Anuluj" />
-      <Button layoutX="489.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickEditRank" text="Edytuj" />
-      <TableView layoutX="753.0" layoutY="88.0" prefHeight="564.0" prefWidth="569.0">
+      <Label layoutX="303.0" layoutY="23.0" prefHeight="49.0" prefWidth="203.0" text="Stanowiska" />
+      <Button layoutX="104.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickEditDepartment" text="Edytuj" />
+      <Button layoutX="194.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickCancelDepartment" text="Usuń" />
+      <Button layoutX="459.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickCancelRank" text="Usuń" />
+      <Button layoutX="381.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickEditRank" text="Edytuj" />
+      <TableView layoutX="548.0" layoutY="88.0" prefHeight="564.0" prefWidth="413.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn prefWidth="75.0" text="Imię" />
+          <TableColumn prefWidth="75.0" text="Nazwisko" />
+            <TableColumn prefWidth="122.0" text="nr. ewidencyjny" />
         </columns>
       </TableView>
+      <TableView fx:id="tableRange" layoutX="1008.0" layoutY="88.0" prefHeight="564.0" prefWidth="292.0">
+        <columns>
+          <TableColumn fx:id="columnRange" prefWidth="75.0" text="Ranga" />
+          <TableColumn fx:id="columnPagons" prefWidth="75.0" text="Pagony" />
+        </columns>
+      </TableView>
+      <Button layoutX="1008.0" layoutY="652.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="1122.0" layoutY="652.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="1235.0" layoutY="652.0" mnemonicParsing="false" text="Button" />
    </children>
 </AnchorPane>

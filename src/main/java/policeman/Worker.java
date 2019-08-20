@@ -25,7 +25,7 @@ public class Worker implements Serializable {
 private Range policemanRange;
 @ManyToOne
 private Department policemanDepartment;
-@ManyToOne
+@ManyToOne(fetch = FetchType.EAGER)
 private Rank policemanRank;
 @OneToOne(mappedBy = "worker")
 private ComputerDetails computer;
@@ -41,6 +41,8 @@ private  boolean policemanExchange;
 private  boolean policemanCryptomail;
 @Column
 private boolean policemanSWD;
+@Column
+private boolean isActiv;
 
     public int getId() {
         return id;
@@ -154,7 +156,23 @@ private boolean policemanSWD;
         this.policemanSWD = policemanSWD;
     }
 
-    public Worker(String name, String surrname, String ewidential, String pesel, Range policemanRange, Department policemanDepartment, Rank policemanRank, boolean policemanIntranet, boolean policemanIntradok, boolean policemanLotus, boolean policemanExchange, boolean policemanCryptomail, boolean policemanSWD) {
+    public ComputerDetails getComputer() {
+        return computer;
+    }
+
+    public void setComputer(ComputerDetails computer) {
+        this.computer = computer;
+    }
+
+    public boolean isActiv() {
+        return isActiv;
+    }
+
+    public void setActiv(boolean activ) {
+        isActiv = activ;
+    }
+
+    public Worker(String name, String surrname, String ewidential, String pesel, Range policemanRange, Department policemanDepartment, Rank policemanRank, boolean policemanIntranet, boolean policemanIntradok, boolean policemanLotus, boolean policemanExchange, boolean policemanCryptomail, boolean policemanSWD, boolean isActiv) {
         this.name = name;
         this.surrname = surrname;
         this.ewidential = ewidential;
@@ -168,6 +186,7 @@ private boolean policemanSWD;
         this.policemanExchange = policemanExchange;
         this.policemanCryptomail = policemanCryptomail;
         this.policemanSWD = policemanSWD;
+        this.isActiv = isActiv;
     }
 
     public Worker(){}
@@ -187,14 +206,20 @@ private boolean policemanSWD;
                 getName().equals(worker.getName()) &&
                 getSurrname().equals(worker.getSurrname()) &&
                 Objects.equals(getEwidential(), worker.getEwidential()) &&
-                Objects.equals(getPesel(), worker.getPesel()) &&
-                Objects.equals(getPolicemanRange(), worker.getPolicemanRange()) &&
-                Objects.equals(getPolicemanDepartment(), worker.getPolicemanDepartment()) &&
-                Objects.equals(getPolicemanRank(), worker.getPolicemanRank());
+                Objects.equals(getPesel(), worker.getPesel())&&
+                isActiv()==worker.isActiv();
+    }
+
+    public Worker(String name, String surrname, String ewidential, String pesel) {
+        this.name = name;
+        this.surrname = surrname;
+        this.ewidential = ewidential;
+        this.pesel = pesel;
+        this.isActiv = true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getSurrname(), getEwidential(), getPesel(), getPolicemanRange(), getPolicemanDepartment(), getPolicemanRank(), isPolicemanIntranet(), isPolicemanIntradok(), isPolicemanLotus(), isPolicemanExchange(), isPolicemanCryptomail(), isPolicemanSWD());
+        return Objects.hash(getId(), getName(), getSurrname(), getEwidential(), getPesel(), getPolicemanRange(), getPolicemanDepartment(), getPolicemanRank(), isPolicemanIntranet(), isPolicemanIntradok(), isPolicemanLotus(), isPolicemanExchange(), isPolicemanCryptomail(), isPolicemanSWD(), isActiv());
     }
 }

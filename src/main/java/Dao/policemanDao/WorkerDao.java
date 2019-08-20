@@ -2,16 +2,13 @@ package Dao.policemanDao;
 
 import Dao.DBConnect;
 import interfaces.DatabaseDao;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import policeman.Department;
-import policeman.Rank;
+import policeman.Worker;
 
 import java.util.List;
 
-public class RankDao implements DatabaseDao {
+public class WorkerDao implements DatabaseDao {
     @Override
     public void save(Object entity) {
         Session session = DBConnect.getSession();
@@ -23,23 +20,25 @@ public class RankDao implements DatabaseDao {
 
     @Override
     public void update(Object entity) {
-    Rank rank = (Rank) entity;
+        Worker worker = (Worker) entity;
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery("UPDATE Rank set nameRanks=: name where id=:id");
-        query.setParameter("name", rank.getNameRanks());
-         query.setParameter("id",rank.getRanksId());
+        Query query = session.createQuery("UPDATE Worker  set name=:name, surrname=:surrname, pesel=:pesel, ewidential=:ewidential where id=:id");
+        query.setParameter("name", worker.getName());
+        query.setParameter("surrname",worker.getSurrname());
+        query.setParameter("pesel", worker.getPesel());
+        query.setParameter("ewidential", worker.getEwidential());
+        query.setParameter("id",worker.getId());
         query.executeUpdate();
         session.getTransaction().commit();
         DBConnect.closeSession();
-
     }
 
     @Override
     public void delete(int i) {
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery("delete from Rank where id= :id");
+        Query query = session.createQuery("delete from Worker where id= :id");
         query.setParameter("id",i).executeUpdate();
         session.getTransaction().commit();
         DBConnect.closeSession();
@@ -49,7 +48,7 @@ public class RankDao implements DatabaseDao {
     public Object findByYd(int id) {
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery(" from Rank where id=:id");
+        Query query = session.createQuery(" from Worker where id=:id");
         query.setParameter("id",id).executeUpdate();
         session.getTransaction().commit();
         DBConnect.closeSession();
@@ -62,25 +61,23 @@ public class RankDao implements DatabaseDao {
     }
 
     @Override
-    public List<Rank> getList() {
+    public List<Worker> getList() {
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM Rank ");
+        Query query = session.createQuery("FROM Worker worker WHERE worker.isActiv=true");
         session.getTransaction().commit();
-        List<Rank> list = query.list();
+        List<Worker> list = query.list();
         DBConnect.closeSession();
         return list;
     }
 
-    public ObservableList<Rank> getListWhereDepartment(Department department){
-        Session session=DBConnect.getSession();
+    public List<Worker> getListInActiv() {
+        Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery("from Rank rank WHERE rank.department=:depart");
-        query.setParameter("depart",department);
+        Query query = session.createQuery("FROM Worker worker WHERE worker.isActiv=false");
         session.getTransaction().commit();
-        ObservableList<Rank> list = FXCollections.observableArrayList(query.list());
+        List<Worker> list = query.list();
         DBConnect.closeSession();
         return list;
     }
-
 }

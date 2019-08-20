@@ -12,7 +12,7 @@ import java.util.Set;
 public class Rank implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private int ranksId;
     @Column
     private String nameRanks;

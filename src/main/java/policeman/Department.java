@@ -90,4 +90,9 @@ public class Department implements Serializable {
     public int hashCode() {
         return Objects.hash(getId(), getDepartmentName(), getRanks(), getWorkers());
     }
+
+    @Override
+    public String toString(){
+        return departmentName;
+    }
 }

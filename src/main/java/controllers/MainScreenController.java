@@ -1,5 +1,6 @@
 package controllers;
 
+import Dao.policemanDao.RangeDao;
 import building.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -8,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
@@ -25,7 +28,7 @@ public class MainScreenController {
     @FXML
     private MenuItem menuItemAddProduct;
     @FXML
-    private Menu menuConfiguration;
+    ImageView imageView;
     private static Building kindOfbuilding = null;
     private BooleanProperty isNewBuilding = new SimpleBooleanProperty(false);
 
@@ -40,7 +43,8 @@ public class MainScreenController {
         menuItemAddProduct.setOnAction(click-> createCenterPane("/FXML/product/AddProductScreen.fxml"));
         RoomDao roomDao = new RoomDao();
         createMenuBuilding(buildingDao);
-       // createCenterPane("/FXML/CalendarScreen.fxml");
+        RangeDao rangeDao = new RangeDao();
+        imageView.setImage(new Image(rangeDao.getList().get(16).getPath()));
     }
 
     private void createMenuBuilding(BuildingDao buildingDao) {
@@ -96,12 +100,12 @@ public class MainScreenController {
 
     @FXML
     void clickShowPoliceman(ActionEvent event) {
-createCenterPane("/FXML/ShowPolicemanScreen.fxml");
+createCenterPane("/FXML/worker/ShowPolicemanScreen.fxml");
     }
 
     @FXML
     void clickAddPoliceman(ActionEvent event){
-        createCenterPane("/FXML/AddPolicemanScreen.fxml");
+        createCenterPane("/FXML/worker/AddPolicemanScreen.fxml");
     }
 
     @FXML

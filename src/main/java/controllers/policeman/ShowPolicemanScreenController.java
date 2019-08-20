@@ -1,6 +1,8 @@
 package controllers.policeman;
 
 
+import Dao.policemanDao.DepartmentDao;
+import Dao.policemanDao.WorkerDao;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -8,14 +10,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import policeman.Department;
 import policeman.Worker;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShowPolicemanScreenController {
-    @FXML
-    private TableColumn<Worker,Integer> idColumn;
     @FXML
     private TableColumn<Worker, String> nameColumn;
     @FXML
@@ -32,13 +33,11 @@ public class ShowPolicemanScreenController {
     private TextField searchPolicemanTextField;
     @FXML
     private VBox vBoxButtons;
-
-
-    private String search;
     private static Worker editWorker;
-    private List<Worker> temporaryList = new ArrayList<Worker>();
- //   public ObservableList<Worker> specialObservablePolicemanList = FXCollections.observableArrayList();
-
+    private List<Worker> temporaryList = new ArrayList<>();
+    private WorkerDao workerDao = new WorkerDao();
+    private DepartmentDao departmentDao = new DepartmentDao();
+    private ObservableList<Worker> observablePolicemanList = FXCollections.observableArrayList(workerDao.getList());
 
     public static Worker getEditWorker() {
         return editWorker;
@@ -56,67 +55,61 @@ public class ShowPolicemanScreenController {
 //        });
 //        ObservableList<Worker> observableListWorker;
 //        observableListWorker = FXCollections.observableList(Worker.getWorekrList());
-//        setPolicemanTableView(observableListWorker);
-//        observableListWorker.addListener((ListChangeListener.Change<? extends Worker> c)-> {      //dodanie Listnera na obserwowaną listę
-//                while (c.next()) if (c.wasUpdated()) setPolicemanTableView(observableListWorker);
-//            }
-//        );
-//        /**
-//         * Getting the element from the table on which the cursor is positioned
-//         */
-//            policemanTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->editWorker = newValue);
-///**
-// * Handling tw-click on mouse and opening window with details
-// */
+        setPolicemanTableView(observablePolicemanList);
+        /**
+         * Getting the element from the table on which the cursor is positioned
+        */
+        policemanTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->editWorker = newValue);
+
 //        policemanTableView.setOnMouseClicked(click ->{
 //            if (click.getClickCount()==2){
 //               MainScreenController.getMainScreenController().createCenter("/FXML/workers/DetailsPolicemanScreen.fxml");
 //            }
 //        });
-//        /**
-//         * Reading the values ​​of the search field and displaying the matching values ​​dynamically
-//         */
-//        searchPolicemanTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-//                    temporaryList = new ArrayList<>();
-//                    search = newValue.toLowerCase();
-//                    for (Worker x : observableListWorker) {
-//                        if (x.getName().toLowerCase().contains(newValue.toLowerCase())) {
-//                            if (!temporaryList.contains(x))
-//                                temporaryList.add(x);
-//                        }
-//                        if (x.getSurrname().toLowerCase().contains(search)) {
-//                            if (!temporaryList.contains(x))
-//                                temporaryList.add(x);
-//                        }
-//                        if (x.getEwidential().toLowerCase().contains(search)) {
-//                            if (!temporaryList.contains(x))
-//                                temporaryList.add(x);
-//                        }
-//                        if (x.getPesel().toLowerCase().contains(search)) {
-//                            if (!temporaryList.contains(x))
-//                                temporaryList.add(x);
-//                        }
-//                    }
-//                    ObservableList<Worker> listResult = FXCollections.observableArrayList(temporaryList);
-//                    setPolicemanTableView(listResult);
-//                }
-//        );
-//        ToggleGroup buttonsgroup = new ToggleGroup();
-//        for(Departament departament:Departament.getDepartamentList()){
-//            ToggleButton toggleButton = new ToggleButton(departament.getName());
-//            toggleButton.setWrapText(true);
-//            toggleButton.setPrefWidth(340);
-//            toggleButton.setToggleGroup(buttonsgroup);
-//            toggleButton.setOnAction(event-> {
-//                        List <Worker> workerSpecialList = new ArrayList<>();
-//                for (Worker worker : Worker.getWorekrList()) {
-//                    if(worker.getPolicemanDepartament()!=null&& worker.getPolicemanDepartament().getId()==departament.getId())
-//                    workerSpecialList.add(worker);
-//                }
-//                setPolicemanTableView(FXCollections.observableArrayList(workerSpecialList));
-//                        });
-//            vBoxButtons.getChildren().add(toggleButton);
-//        }
+        /**
+         * Reading the values ​​of the search field and displaying the matching values ​​dynamically
+         */
+        searchPolicemanTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+                    temporaryList = new ArrayList<>();
+                    String search = newValue.toLowerCase();
+                    for (Worker x : observablePolicemanList) {
+                        if (x.getName().toLowerCase().contains(newValue.toLowerCase())) {
+                           if (!temporaryList.contains(x))
+                               temporaryList.add(x);
+                        }
+                        if (x.getSurrname().toLowerCase().contains(search)) {
+                            if (!temporaryList.contains(x))
+                                temporaryList.add(x);
+                        }
+                        if (x.getEwidential().toLowerCase().contains(search)) {
+                            if (!temporaryList.contains(x))
+                                temporaryList.add(x);
+                        }
+                        if (x.getPesel().toLowerCase().contains(search)) {
+                            if (!temporaryList.contains(x))
+                                temporaryList.add(x);
+                        }
+                   }
+                    ObservableList<Worker> listResult = FXCollections.observableArrayList(temporaryList);
+                   setPolicemanTableView(listResult);
+                }
+        );
+        ToggleGroup buttonsGroup = new ToggleGroup();
+        for(Department department:departmentDao.getList()){
+            ToggleButton toggleButton = new ToggleButton(department.getDepartmentName());
+            toggleButton.setWrapText(true);
+            toggleButton.setPrefWidth(340);
+            toggleButton.setToggleGroup(buttonsGroup);
+            toggleButton.setOnAction(event-> {
+                        List <Worker> workerSpecialList = new ArrayList<>();
+                for (Worker worker : observablePolicemanList) {
+                    if(worker.getPolicemanDepartment()!=null&& worker.getPolicemanDepartment().equals(department))
+                    workerSpecialList.add(worker);
+                }
+                setPolicemanTableView(FXCollections.observableArrayList(workerSpecialList));
+                        });
+            vBoxButtons.getChildren().add(toggleButton);
+        }
     }
     /**
      * filling the table with data
@@ -125,17 +118,15 @@ public class ShowPolicemanScreenController {
 
     public void setPolicemanTableView(ObservableList<Worker> glist) {
         policemanTableView.setItems(glist);
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         surrnameColumn.setCellValueFactory(new PropertyValueFactory<>("surrname"));
         identityColumn.setCellValueFactory(new PropertyValueFactory<>("ewidential"));
         peselColumn.setCellValueFactory(new PropertyValueFactory<>("pesel"));
-        standingColumn.setCellValueFactory(new PropertyValueFactory<>("namePoliceDepartament"));
+        standingColumn.setCellValueFactory(new PropertyValueFactory<>("policemanDepartment"));
     }
 
     @FXML
      void clickShowAll(){
-  //      ObservableList<Worker> listResult = FXCollections.observableArrayList(Worker.getWorekrList());
-  //      setPolicemanTableView(listResult);
+       setPolicemanTableView(observablePolicemanList);
     }
 }

@@ -1,17 +1,18 @@
+import Dao.policemanDao.RangeDao;
+import Dao.policemanDao.WorkerDao;
 import Dao.productDao.SwitchDao;
 import building.Building;
 import building.BuildingDao;
 import building.Room;
 import building.RoomDao;
-import controllers.MainScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import policeman.Range;
+import policeman.Worker;
 import product.*;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 
@@ -28,6 +29,7 @@ public class Main extends Application {
         stage.setScene(new Scene(root, 1366, 768));
        // String cssPath = this.getClass().getResource("/css/mainScreenCss.css").toExternalForm();
         //setEleemntsTesting();
+        //createRange();
         stage.show();
     }
 
@@ -63,5 +65,45 @@ public class Main extends Application {
             ComputerSwitch computerSwitch1 = new ComputerSwitch("RX-200", Integer.toString(j), product4);
             switchDao.save(computerSwitch1);
         }
+        WorkerDao workerDao = new WorkerDao();
+        Worker worker = new Worker("Jan","Kowalski","123456","11111111111");
+        workerDao.save(worker);
     }
+
+    public void createRange(){
+        RangeDao rangeDao = new RangeDao();
+        Range range = new Range("Posterunkowy","/Pics/P.jpg");
+        Range range1 = new Range("Starszy Posterunkowy","/Pics/SP.jpg");
+        Range range2 = new Range("Sierżant","/Pics/S.jpg");
+        Range range3 = new Range("Starszy Sierżant","/Pics/SSS.jpg");
+        Range range4 = new Range("Sierżant Sztabowy","/Pics/SS.jpg");
+        Range range5 = new Range("Młodszy Aspirant","/Pics/MA.jpg");
+        Range range6 = new Range("Aspirant","/Pics/A.jpg");
+        Range range7 = new Range("Starszy Aspirant","/Pics/SA.jpg");
+        Range range8 = new Range("Aspirant Sztabowy","/Pics/AS.jpg");
+        Range range9 = new Range("Podkomisarz","/Pics/PK.jpg");
+        Range range10 = new Range("Komisarz","/Pics/K.jpg");
+        Range range11 = new Range("Nadkomisarz","/Pics/NK.jpg");
+        Range range12 = new Range("Podinspektor","/Pics/PI.jpg");
+        Range range13 = new Range("Młodszy Inspektor","/Pics/MI.jpg");
+        Range range14 = new Range("Inspektor","/Pics/I.jpg");
+        Range range15 = new Range("Nadinspektor","/Pics/NI.jpg");
+        Range range16 = new Range("Generalny Inspektor","/Pics/GI.jpg");
+        rangeDao.save(range);
+        rangeDao.save(range1);
+        rangeDao.save(range2);
+        rangeDao.save(range3);
+        rangeDao.save(range4);
+        rangeDao.save(range5);
+        rangeDao.save(range6);
+        rangeDao.save(range7);
+        rangeDao.save(range8);
+        rangeDao.save(range9);
+        rangeDao.save(range10);
+        rangeDao.save(range11);
+        rangeDao.save(range12);
+        rangeDao.save(range13);
+        rangeDao.save(range14);
+        rangeDao.save(range15);
+        rangeDao.save(range16);    }
 }

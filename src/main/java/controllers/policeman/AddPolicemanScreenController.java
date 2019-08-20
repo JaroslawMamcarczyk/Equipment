@@ -1,8 +1,12 @@
 package controllers.policeman;
 
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import Dao.policemanDao.DepartmentDao;
+import Dao.policemanDao.RangeDao;
+import Dao.policemanDao.RankDao;
+import Dao.policemanDao.WorkerDao;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -27,7 +31,7 @@ public class AddPolicemanScreenController {
     @FXML
     private ChoiceBox<Rank> choiceRanks;
     @FXML
-    private ChoiceBox<Department> choiceDepartament;
+    private ChoiceBox<Department> choiceDepartment;
     @FXML
     private CheckBox checkBoxIntradok;
     @FXML
@@ -40,29 +44,24 @@ public class AddPolicemanScreenController {
     private CheckBox checkBoxSWD;
     @FXML
     private CheckBox checkBoxCryptomail;
-  //  private WorkerDao policeman=null;
-    private BooleanProperty isNewRanks = new SimpleBooleanProperty(false);
+    private WorkerDao workerDao = new WorkerDao();
+    private RangeDao rangeDao = new RangeDao();
+    private DepartmentDao departmentDao = new DepartmentDao();
+    private RankDao rankDao = new RankDao();
+//    private BooleanProperty isNewRanks = new SimpleBooleanProperty(false);
 
 
 
     @FXML
     void initialize(){
-//        ObservableList<Range> rangeObservableList = FXCollections.observableArrayList(Range.getListRange());
-//        choiceRange.setConverter(new RangeConverter());
-//        choiceRange.setItems(rangeObservableList);
-//        choiceDepartament.setConverter(new DepartamentConverter());
-//        ObservableList<Departament> departamentObservableList= FXCollections.observableList(Departament.getDepartamentList());
-//        choiceDepartament.setItems(departamentObservableList);
-//        choiceDepartament.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-//            choiceRanks.setConverter(new RanksConverter());
-//            ObservableList<Ranks> ranksObservableList = FXCollections.observableArrayList();
-//            for(Ranks ranks:Ranks.getRanksList()){
-//                if(ranks.getDepartamentRanks().getId()==newValue.getId()){
-//                    ranksObservableList.add(ranks);
-//                }
-//            }
-//            choiceRanks.setItems(ranksObservableList);
-//        });
+        ObservableList<Range> rangeObservableList = FXCollections.observableArrayList(rangeDao.getList());
+        choiceRange.setItems(rangeObservableList);
+        ObservableList<Department> departamentObservableList= FXCollections.observableList(departmentDao.getList());
+        choiceDepartment.setItems(departamentObservableList);
+        choiceDepartment.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Rank> ranksObservableList = FXCollections.observableArrayList(rankDao.getListWhereDepartment(newValue));
+            choiceRanks.setItems(ranksObservableList);
+        });
 //        isNewRanks.addListener((observable, oldValue, newValue) -> {
 //            if(newValue){
 //                Database date = new Database();
@@ -95,17 +94,17 @@ public class AddPolicemanScreenController {
             lsurrname.setStyle("-fx-background-color: red");
         }
         if (isOK) {
-            int rangeToSave = 0;
-            int ranksToSave = 0;
-            int departamentToSave = 0;
+            Range rangeToSave = null;
+            Rank ranksToSave = null;
+            Department departamentToSave = null;
             if (choiceRange.getValue() != null) {
-                rangeToSave = choiceRange.getValue().getId();
+                rangeToSave = choiceRange.getValue();
             }
             if (choiceRanks.getValue() != null) {
-                ranksToSave = choiceRanks.getValue().getRanksId();
+                ranksToSave = choiceRanks.getValue();
             }
-            if (choiceDepartament.getValue() != null) {
-                departamentToSave = choiceDepartament.getValue().getId();
+            if (choiceDepartment.getValue() != null) {
+                departamentToSave = choiceDepartment.getValue();
             }
 //            policeman = new WorkerDao(laddName.getText(),lsurrname.getText(),lewidential.getText(),lpesel.getText(),rangeToSave,departamentToSave,ranksToSave,0,0,0,0,0,0);
 //            if(checkBoxIntradok.isSelected())policeman.setDaoIntradok(1);
@@ -124,6 +123,6 @@ public class AddPolicemanScreenController {
 
     public void clickAddRanks(){
     //    ConfigurationScreenController.createNewRanks(choiceDepartament.getSelectionModel().getSelectedItem());
-        isNewRanks.set(true);
+ //       isNewRanks.set(true);
     }
 }

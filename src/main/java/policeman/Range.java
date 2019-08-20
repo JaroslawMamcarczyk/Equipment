@@ -15,7 +15,7 @@ private int id;
 @Column
 private String rangeName;
 @Column
-private String path = null;
+private String path;
 @OneToMany(mappedBy = "policemanRange")
 private Set<Worker> workers;
 
@@ -75,8 +75,6 @@ private Set<Worker> workers;
 
     @Override
     public String toString() {
-        return "Range{" +
-                "rangeName='" + rangeName + '\'' +
-                '}';
+        return rangeName;
     }
 }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:controller="controllers.policeman.AddPolicemanScreenController" minHeight="0.0" minWidth="0.0" prefHeight="743.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="276.0" layoutY="516.0" mnemonicParsing="false" onAction="#clickSave" text="Zapisz" />
+      <VBox id="vboxLabel" layoutX="45.0" layoutY="48.0" prefHeight="450.0" prefWidth="550.0" spacing="20.0">
+         <children>
+            <HBox prefHeight="38.0" prefWidth="550.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="275.0" text="Imię" />
+                  <TextField fx:id="laddName" prefHeight="39.0" prefWidth="275.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="43.0" prefWidth="550.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="275.0" text="Nazwisko" />
+                  <TextField fx:id="lsurrname" prefHeight="31.0" prefWidth="275.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="33.0" prefWidth="550.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="275.0" text="ID" />
+                  <TextField fx:id="lewidential" prefHeight="31.0" prefWidth="275.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="34.0" prefWidth="550.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="275.0" text="Pesel" />
+                  <TextField fx:id="lpesel" prefHeight="31.0" prefWidth="275.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="35.0" prefWidth="550.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="275.0" text="Ranga" />
+                  <ChoiceBox fx:id="choiceRange" prefHeight="31.0" prefWidth="275.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="44.0" prefWidth="550.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="275.0" text="Departament" />
+                  <ChoiceBox fx:id="choiceDepartment" prefHeight="31.0" prefWidth="275.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="47.0" prefWidth="550.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="275.0" text="Stanowisko" />
+                  <ChoiceBox fx:id="choiceRanks" prefHeight="24.0" prefWidth="275.0" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+      <VBox layoutX="672.0" layoutY="48.0" prefHeight="200.0" prefWidth="314.0" spacing="10.0">
+         <children>
+            <Label prefHeight="21.0" prefWidth="336.0" text="Uprawnienia:" />
+            <CheckBox fx:id="checkBoxIntranet" mnemonicParsing="false" prefHeight="21.0" prefWidth="317.0" text="Intranet" />
+            <CheckBox fx:id="checkBoxIntradok" mnemonicParsing="false" prefHeight="21.0" prefWidth="322.0" text="Intradok" />
+            <CheckBox fx:id="checkBoxExchange" mnemonicParsing="false" prefHeight="21.0" prefWidth="318.0" text="Exchange" />
+            <CheckBox fx:id="checkBoxCryptomail" mnemonicParsing="false" prefHeight="21.0" prefWidth="318.0" text="Kryptomail" />
+            <CheckBox fx:id="checkBoxLotus" mnemonicParsing="false" prefHeight="21.0" prefWidth="314.0" text="Lotus" />
+            <CheckBox fx:id="checkBoxSWD" mnemonicParsing="false" prefHeight="21.0" prefWidth="317.0" text="SWD" />
+         </children>
+      </VBox>
+      <Button layoutX="672.0" layoutY="425.0" mnemonicParsing="false" onAction="#clickAddRanks" prefHeight="31.0" prefWidth="186.0" text="Dodaj stanowisko" />
+   </children>
+</AnchorPane>

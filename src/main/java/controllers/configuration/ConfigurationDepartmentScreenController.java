@@ -1,21 +1,23 @@
 package controllers.configuration;
 
 import Dao.policemanDao.DepartmentDao;
+import Dao.policemanDao.RangeDao;
 import Dao.policemanDao.RankDao;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 import policeman.Department;
+import policeman.Range;
 import policeman.Rank;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class ConfigurationDepartmentScreenController {
@@ -33,18 +35,28 @@ public class ConfigurationDepartmentScreenController {
     private TableColumn<Rank,Integer> columnIdRank;
     @FXML
     private TableColumn<Rank, String> columnRank;
+    @FXML
+    private TableView<Range> tableRange;
+    @FXML
+    private TableColumn<Range, String> columnRange;
+    @FXML
+    private TableColumn<Range,Range> columnPagons;
+
     private BooleanProperty isNewDepartment = new SimpleBooleanProperty(false);
     private DepartmentDao departmentDao = new DepartmentDao();
     private ObservableList<Department> departmentList = FXCollections.observableArrayList(departmentDao.getList());
     private  BooleanProperty isNewRank = new SimpleBooleanProperty(false);
     private RankDao rankDao = new RankDao();
-    private List<Rank> listRank = rankDao.getList();
     private Department checkedDepartment;
     private Rank checkedRank;
+    private RangeDao rangeDao = new RangeDao();
+    private ObservableList<Range> rangeObservableList = FXCollections.observableArrayList(rangeDao.getList());
 
 
     public void initialize(){
 createTable();
+createTableRange();
+
 isNewDepartment.addListener(observable -> {
     if (isNewDepartment.get()){
         tableViewDepartment.refresh();
@@ -53,13 +65,13 @@ isNewDepartment.addListener(observable -> {
 });
 isNewRank.addListener(observable -> {
     if(isNewRank.get()){
-        createTableRank(FXCollections.observableArrayList(createListRank()));
+        createTableRank(rankDao.getListWhereDepartment(checkedDepartment));
         isNewRank.set(false);
     }
 });
 tableRank.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> checkedRank = newValue );
 tableViewDepartment.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)-> checkedDepartment = newValue);
-tableViewDepartment.setOnMouseClicked(click ->createTableRank(createListRank()));
+tableViewDepartment.setOnMouseClicked(click ->createTableRank(rankDao.getListWhereDepartment(checkedDepartment)));
     }
 
     private void createTable(){
@@ -78,6 +90,27 @@ tableViewDepartment.setOnMouseClicked(click ->createTableRank(createListRank()))
             columnIdRank.prefWidthProperty().bind(tableRank.widthProperty().multiply(0.2));
             columnRank.setCellValueFactory(new PropertyValueFactory<>("nameRanks"));
             columnRank.prefWidthProperty().bind(tableRank.widthProperty().multiply(0.75));
+        }
+
+        private void createTableRange(){
+        tableRange.setItems(rangeObservableList);
+        columnRange.setCellValueFactory(new PropertyValueFactory<>("rangeName"));
+        columnRange.prefWidthProperty().bind(tableRange.widthProperty().multiply(0.45));
+        columnPagons.setCellValueFactory(cell->new SimpleObjectProperty<Range>(cell.getValue()));
+        columnPagons.prefWidthProperty().bind(tableRange.widthProperty().multiply(0.45));
+        columnPagons.setStyle("-fx-alignment: CENTER");
+        columnPagons.setCellFactory(param->{
+            return new TableCell<Range, Range>(){
+                @Override
+                protected void updateItem(Range range, boolean b) {
+                    super.updateItem(range, b);
+                    if(!b) {
+                        ImageView imageView = new ImageView(new Image(range.getPath()));
+                        setGraphic(imageView);
+                   }
+                }
+            };
+        });
         }
 
     @FXML
@@ -161,8 +194,8 @@ if(checkedDepartment!=null){
     @FXML
     public void clickEditRank(){
         if(checkedRank!=null) {
-            TextInputDialog textInputDialog = new TextInputDialog("Podaj nową nazwę");
-            textInputDialog.setContentText(checkedRank.getNameRanks());
+            TextInputDialog textInputDialog = new TextInputDialog(checkedRank.getNameRanks());
+            textInputDialog.setContentText("Zmień nazwę stanowiska");
             Optional<String> result = textInputDialog.showAndWait();
             result.ifPresent(resultFromDialog ->{
                 checkedRank.setNameRanks(result.get());
@@ -189,16 +222,5 @@ if(checkedRank!=null){
         alert.setContentText(text);
         alert.setHeaderText("Błąd edycji");
         return alert;
-    }
-
-    private ObservableList<Rank> createListRank(){
-        List<Rank> listRank = rankDao.getList();
-        for(Rank rank:listRank){
-            if(rank.getDepartment().equals(checkedDepartment)){
-                listRank.add(rank);
-            }
-        }
-        ObservableList<Rank> rankObservableList = FXCollections.observableArrayList(listRank);
-        return rankObservableList;
     }
 }
