@@ -16,9 +16,9 @@ public class Worker implements Serializable {
 @Column
     private String name;
 @Column
-    private String surrname;
+    private String surname;
 @Column
-    private String ewidential;
+    private String evidential;
 @Column
     private String pesel;
 @ManyToOne
@@ -60,20 +60,20 @@ private boolean isActiv;
         this.name = name;
     }
 
-    public String getSurrname() {
-        return surrname;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setSurrname(String surrname) {
-        this.surrname = surrname;
+    public void setSurname(String surrname) {
+        this.surname = surrname;
     }
 
-    public String getEwidential() {
-        return ewidential;
+    public String getEvidential() {
+        return evidential;
     }
 
-    public void setEwidential(String ewidential) {
-        this.ewidential = ewidential;
+    public void setEvidential(String ewidential) {
+        this.evidential = ewidential;
     }
 
     public String getPesel() {
@@ -172,10 +172,10 @@ private boolean isActiv;
         isActiv = activ;
     }
 
-    public Worker(String name, String surrname, String ewidential, String pesel, Range policemanRange, Department policemanDepartment, Rank policemanRank, boolean policemanIntranet, boolean policemanIntradok, boolean policemanLotus, boolean policemanExchange, boolean policemanCryptomail, boolean policemanSWD, boolean isActiv) {
+    public Worker(String name, String surname, String evidential, String pesel, Range policemanRange, Department policemanDepartment, Rank policemanRank, boolean policemanIntranet, boolean policemanIntradok, boolean policemanLotus, boolean policemanExchange, boolean policemanCryptomail, boolean policemanSWD, boolean isActiv) {
         this.name = name;
-        this.surrname = surrname;
-        this.ewidential = ewidential;
+        this.surname = surname;
+        this.evidential = evidential;
         this.pesel = pesel;
         this.policemanRange = policemanRange;
         this.policemanDepartment = policemanDepartment;
@@ -204,22 +204,22 @@ private boolean isActiv;
                 isPolicemanCryptomail() == worker.isPolicemanCryptomail() &&
                 isPolicemanSWD() == worker.isPolicemanSWD() &&
                 getName().equals(worker.getName()) &&
-                getSurrname().equals(worker.getSurrname()) &&
-                Objects.equals(getEwidential(), worker.getEwidential()) &&
+                getSurname().equals(worker.getSurname()) &&
+                Objects.equals(getEvidential(), worker.getEvidential()) &&
                 Objects.equals(getPesel(), worker.getPesel())&&
                 isActiv()==worker.isActiv();
     }
 
-    public Worker(String name, String surrname, String ewidential, String pesel) {
+    public Worker(String name, String surname, String evidential, String pesel) {
         this.name = name;
-        this.surrname = surrname;
-        this.ewidential = ewidential;
+        this.surname = surname;
+        this.evidential = evidential;
         this.pesel = pesel;
         this.isActiv = true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getSurrname(), getEwidential(), getPesel(), getPolicemanRange(), getPolicemanDepartment(), getPolicemanRank(), isPolicemanIntranet(), isPolicemanIntradok(), isPolicemanLotus(), isPolicemanExchange(), isPolicemanCryptomail(), isPolicemanSWD(), isActiv());
+        return Objects.hash(getId(), getName(), getSurname(), getEvidential(), getPesel(), getPolicemanRange(), getPolicemanDepartment(), getPolicemanRank(), isPolicemanIntranet(), isPolicemanIntradok(), isPolicemanLotus(), isPolicemanExchange(), isPolicemanCryptomail(), isPolicemanSWD(), isActiv());
     }
 }

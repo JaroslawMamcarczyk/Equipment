@@ -3,6 +3,7 @@ package controllers.configuration;
 import Dao.policemanDao.DepartmentDao;
 import Dao.policemanDao.RangeDao;
 import Dao.policemanDao.RankDao;
+import Dao.policemanDao.WorkerDao;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -18,6 +19,8 @@ import javafx.util.Pair;
 import policeman.Department;
 import policeman.Range;
 import policeman.Rank;
+import policeman.Worker;
+
 import java.util.Optional;
 
 public class ConfigurationDepartmentScreenController {
@@ -41,6 +44,14 @@ public class ConfigurationDepartmentScreenController {
     private TableColumn<Range, String> columnRange;
     @FXML
     private TableColumn<Range,Range> columnPagons;
+    @FXML
+    private TableView<Worker> tableWorker;
+    @FXML
+    private TableColumn<Worker, String> columnName;
+    @FXML
+    private TableColumn<Worker,String> columnSurname;
+    @FXML
+    private TableColumn<Worker, String> columnEvidential;
 
     private BooleanProperty isNewDepartment = new SimpleBooleanProperty(false);
     private DepartmentDao departmentDao = new DepartmentDao();
@@ -51,6 +62,7 @@ public class ConfigurationDepartmentScreenController {
     private Rank checkedRank;
     private RangeDao rangeDao = new RangeDao();
     private ObservableList<Range> rangeObservableList = FXCollections.observableArrayList(rangeDao.getList());
+    private WorkerDao workerDao = new WorkerDao();
 
 
     public void initialize(){
@@ -71,7 +83,11 @@ isNewRank.addListener(observable -> {
 });
 tableRank.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> checkedRank = newValue );
 tableViewDepartment.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)-> checkedDepartment = newValue);
-tableViewDepartment.setOnMouseClicked(click ->createTableRank(rankDao.getListWhereDepartment(checkedDepartment)));
+tableViewDepartment.setOnMouseClicked(click ->{
+    createTableRank(rankDao.getListWhereDepartment(checkedDepartment));
+    ObservableList<Worker> workerObservableList = FXCollections.observableArrayList(workerDao.getListInDepartment(checkedDepartment));
+    createTablePoliceman(workerObservableList);
+});
     }
 
     private void createTable(){
@@ -82,6 +98,13 @@ tableViewDepartment.setOnMouseClicked(click ->createTableRank(rankDao.getListWhe
         columnDepartment.prefWidthProperty().bind(tableViewDepartment.widthProperty().multiply(0.55));
         columnShortName.setCellValueFactory(new PropertyValueFactory<>("departmentShort"));
         columnShortName.prefWidthProperty().bind(tableViewDepartment.widthProperty().multiply(0.2));
+    }
+
+    private  void createTablePoliceman(ObservableList<Worker> workerObservableList){
+        tableWorker.setItems(workerObservableList);
+        columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        columnSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
+        columnEvidential.setCellValueFactory(new PropertyValueFactory<>("evidential"));
     }
 
     private void createTableRank(ObservableList<Rank> list){
@@ -95,7 +118,7 @@ tableViewDepartment.setOnMouseClicked(click ->createTableRank(rankDao.getListWhe
         private void createTableRange(){
         tableRange.setItems(rangeObservableList);
         columnRange.setCellValueFactory(new PropertyValueFactory<>("rangeName"));
-        columnRange.prefWidthProperty().bind(tableRange.widthProperty().multiply(0.45));
+        columnRange.prefWidthProperty().bind(tableRange.widthProperty().multiply(0.48));
         columnPagons.setCellValueFactory(cell->new SimpleObjectProperty<Range>(cell.getValue()));
         columnPagons.prefWidthProperty().bind(tableRange.widthProperty().multiply(0.45));
         columnPagons.setStyle("-fx-alignment: CENTER");

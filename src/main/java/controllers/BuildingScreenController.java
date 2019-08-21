@@ -1,6 +1,5 @@
 package controllers;
-
-import building.BuildingDao;
+import Dao.productDao.ProductDao;
 import building.Room;
 import building.RoomDao;
 import javafx.fxml.FXML;
@@ -10,14 +9,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import product.Product;
-import product.ProductDao;
 import java.util.List;
 
 
 public class BuildingScreenController {
     @FXML
     private StackPane stackPaneGeneral;
-    private BuildingDao buildingDao = new BuildingDao();
     RoomDao roomDao = new RoomDao();
 
     public void initialize() {
@@ -29,8 +26,10 @@ public class BuildingScreenController {
 
         } else {
             for (Room room : roomDao.getList()) {
-              //  if (room.getBuilding().getId() == MainScreenController.getKindOfBuilding()) {
                     AnchorPane anchorPane = new AnchorPane();
+                    anchorPane.setOnMouseClicked(click->{
+                    anchorPane.setPrefSize(500,700);
+                    });
                     anchorPane.setPrefSize(200, 300);
                     VBox vBox = new VBox();
                     Label labelName = new Label(room.getNumber()+" - "+room.getDescription());

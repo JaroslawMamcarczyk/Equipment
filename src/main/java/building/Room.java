@@ -1,5 +1,7 @@
 package building;
 
+import product.ProductTransfer;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -24,13 +26,13 @@ public class Room implements Serializable {
     private Floor floor;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
     private Building building;
 
+    @OneToMany(mappedBy="roomFrom")
+    private Set<ProductTransfer> productTransfersOut;
 
-//    @OneToMany(mappedBy = "roomNumber")
- //   private Set<Room> room;
-
+    @OneToMany(mappedBy = "roomTo")
+    private Set<ProductTransfer> productTransfersTo;
     public enum Floor{
         PARTER, PIWNICA, PIERWSZE, DRUGIE, TRZECIE
     }
@@ -59,13 +61,21 @@ public class Room implements Serializable {
         this.number = number;
     }
 
- //   public Building getBuilding() {
-  //      return building;
-  //  }
+    public Set<ProductTransfer> getProductTransfersOut() {
+        return productTransfersOut;
+    }
 
- //   public void setBuilding(Building building) {
-  //      this.building = building;
-  //  }
+    public void setProductTransfersOut(Set<ProductTransfer> productTransfersOut) {
+        this.productTransfersOut = productTransfersOut;
+    }
+
+    public Set<ProductTransfer> getProductTransfersTo() {
+        return productTransfersTo;
+    }
+
+    public void setProductTransfersTo(Set<ProductTransfer> productTransfersTo) {
+        this.productTransfersTo = productTransfersTo;
+    }
 
     public Floor getFloor() {
         return floor;

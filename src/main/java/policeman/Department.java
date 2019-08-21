@@ -2,6 +2,7 @@ package policeman;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import product.ProductTransfer;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,6 +27,10 @@ public class Department implements Serializable {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @OneToMany(mappedBy = "policemanDepartment")
     private Set<Worker> workers;
+    @OneToMany(mappedBy = "departmentFrom")
+    private Set<ProductTransfer> productTransfersFrom;
+    @OneToMany(mappedBy = "departmentTo")
+    private Set<ProductTransfer> productTransfersTo;
 
 
     public int getId() {

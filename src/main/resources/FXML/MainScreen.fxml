@@ -29,6 +29,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#clickShowPlatform" text="Pokaż Komputery Platformowe" />
                   <MenuItem mnemonicParsing="false" onAction="#clickShowKsip" text="Pokaż Komputery KSIP" />
                   <MenuItem mnemonicParsing="false" onAction="#clickShowSwitch" text="Pokaż Switche" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickTransfer" text="Wykonaj transfer" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Konfiguracja">

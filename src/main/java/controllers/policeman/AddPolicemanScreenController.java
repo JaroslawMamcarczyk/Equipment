@@ -5,16 +5,20 @@ import Dao.policemanDao.DepartmentDao;
 import Dao.policemanDao.RangeDao;
 import Dao.policemanDao.RankDao;
 import Dao.policemanDao.WorkerDao;
+import controllers.MainScreenController;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import policeman.Department;
 import policeman.Range;
 import policeman.Rank;
+import policeman.Worker;
+
+import java.util.Optional;
 
 
 public class AddPolicemanScreenController {
@@ -48,7 +52,7 @@ public class AddPolicemanScreenController {
     private RangeDao rangeDao = new RangeDao();
     private DepartmentDao departmentDao = new DepartmentDao();
     private RankDao rankDao = new RankDao();
-//    private BooleanProperty isNewRanks = new SimpleBooleanProperty(false);
+    private BooleanProperty isNewRanks = new SimpleBooleanProperty(false);
 
 
 
@@ -62,17 +66,15 @@ public class AddPolicemanScreenController {
             ObservableList<Rank> ranksObservableList = FXCollections.observableArrayList(rankDao.getListWhereDepartment(newValue));
             choiceRanks.setItems(ranksObservableList);
         });
-//        isNewRanks.addListener((observable, oldValue, newValue) -> {
-//            if(newValue){
-//                Database date = new Database();
-//                RanksDao.readRanks(date);
-//                int i=choiceDepartament.getSelectionModel().getSelectedIndex();
-//                choiceDepartament.getSelectionModel().clearSelection();
-//                choiceDepartament.getSelectionModel().select(i);
-//                isNewRanks.set(false);
-           }
-//        });
-
+        isNewRanks.addListener((observable) -> {
+            if(isNewRanks.get()) {
+                ObservableList<Rank> rankObservableList = FXCollections.observableArrayList(rankDao.getListWhereDepartment(choiceDepartment.getValue()));
+                choiceRanks.setItems(rankObservableList);
+                choiceRanks.setValue(rankObservableList.get(rankObservableList.size()-1));
+                isNewRanks.set(false);
+            }
+       });
+    }
 
     @FXML
     void clickSave(ActionEvent event) {
@@ -96,7 +98,7 @@ public class AddPolicemanScreenController {
         if (isOK) {
             Range rangeToSave = null;
             Rank ranksToSave = null;
-            Department departamentToSave = null;
+            Department departmentToSave = null;
             if (choiceRange.getValue() != null) {
                 rangeToSave = choiceRange.getValue();
             }
@@ -104,25 +106,44 @@ public class AddPolicemanScreenController {
                 ranksToSave = choiceRanks.getValue();
             }
             if (choiceDepartment.getValue() != null) {
-                departamentToSave = choiceDepartment.getValue();
+                departmentToSave = choiceDepartment.getValue();
             }
-//            policeman = new WorkerDao(laddName.getText(),lsurrname.getText(),lewidential.getText(),lpesel.getText(),rangeToSave,departamentToSave,ranksToSave,0,0,0,0,0,0);
-//            if(checkBoxIntradok.isSelected())policeman.setDaoIntradok(1);
-//            if(checkBoxIntranet.isSelected())policeman.setDaoIntranet(1);
-//            if(checkBoxExchange.isSelected())policeman.setDaoExchange(1);
-//            if(checkBoxCryptomail.isSelected())policeman.setDaoCryptomail(1);
-//            if(checkBoxLotus.isSelected())policeman.setDaoLotus(1);
-//            if(checkBoxSWD.isSelected())policeman.setDaoSWD(1);
-//            policeman.savePoliceman();
-//                WorkerDao.isChangeOnDatabaseProperty().setValue(true);
-//                CreateWindowAlert.createWindowConfirmation("Dodano Nowego Pracownika");
-//           MainScreenController.getMainScreenController().createCenter("/FXML/workers/ShowPolicemanScreen.fxml");
-//            }else CreateWindowAlert.createWindowError("Błąd dodawania nowego policjanta - popraw pola świecące na czerowno");
+            Worker worker = new Worker(laddName.getText(),lsurrname.getText(),lewidential.getText(),lpesel.getText(),rangeToSave,departmentToSave,ranksToSave,false,false,false,false,false,false,true);
+            if(checkBoxIntradok.isSelected())worker.setPolicemanIntradok(true);
+            if(checkBoxIntranet.isSelected())worker.setPolicemanIntranet(true);
+            if(checkBoxExchange.isSelected())worker.setPolicemanExchange(true);
+            if(checkBoxCryptomail.isSelected())worker.setPolicemanCryptomail(true);
+            if(checkBoxLotus.isSelected())worker.setPolicemanLotus(true);
+            if(checkBoxSWD.isSelected())worker.setPolicemanIntradok(true);
+            workerDao.save(worker);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Dodawanie nowego pracownika");
+            alert.setContentText("Sukces - dodano nowego pracownika");
+            alert.showAndWait();
+            MainScreenController.getMainScreenController().createCenterPane("/FXML/worker/ShowPolicemanScreen.fxml");
+            }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Błąd dodawania nowego pracownika");
+            alert.setContentText("Popraw dane podświetlone na czerwono");
+            alert.showAndWait();
+        };
         }
-    }
+
 
     public void clickAddRanks(){
-    //    ConfigurationScreenController.createNewRanks(choiceDepartament.getSelectionModel().getSelectedItem());
- //       isNewRanks.set(true);
+        if(choiceDepartment.getValue()!=null) {
+            TextInputDialog textInputDialog = new TextInputDialog("Podaj nazwę");
+            Optional<String> result = textInputDialog.showAndWait();
+            result.ifPresent(resultFromDialog -> {
+                Rank rank = new Rank(result.get(), choiceDepartment.getValue());
+                rankDao.save(rank);
+                isNewRanks.set(true);
+            });
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Musisz wybrać departament");
+            alert.setTitle("Błąd tworzenia nowego stanowiska");
+            alert.showAndWait();
+        }
     }
 }

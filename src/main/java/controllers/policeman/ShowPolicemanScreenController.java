@@ -3,8 +3,8 @@ package controllers.policeman;
 
 import Dao.policemanDao.DepartmentDao;
 import Dao.policemanDao.WorkerDao;
+import controllers.MainScreenController;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -61,11 +61,11 @@ public class ShowPolicemanScreenController {
         */
         policemanTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->editWorker = newValue);
 
-//        policemanTableView.setOnMouseClicked(click ->{
-//            if (click.getClickCount()==2){
-//               MainScreenController.getMainScreenController().createCenter("/FXML/workers/DetailsPolicemanScreen.fxml");
-//            }
-//        });
+        policemanTableView.setOnMouseClicked(click ->{
+            if (click.getClickCount()==2){
+                MainScreenController.getMainScreenController().createCenterPane("/FXML/workers/DetailsPolicemanScreen.fxml");
+            }
+        });
         /**
          * Reading the values ​​of the search field and displaying the matching values ​​dynamically
          */
@@ -77,11 +77,11 @@ public class ShowPolicemanScreenController {
                            if (!temporaryList.contains(x))
                                temporaryList.add(x);
                         }
-                        if (x.getSurrname().toLowerCase().contains(search)) {
+                        if (x.getSurname().toLowerCase().contains(search)) {
                             if (!temporaryList.contains(x))
                                 temporaryList.add(x);
                         }
-                        if (x.getEwidential().toLowerCase().contains(search)) {
+                        if (x.getEvidential().toLowerCase().contains(search)) {
                             if (!temporaryList.contains(x))
                                 temporaryList.add(x);
                         }
@@ -119,8 +119,8 @@ public class ShowPolicemanScreenController {
     public void setPolicemanTableView(ObservableList<Worker> glist) {
         policemanTableView.setItems(glist);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        surrnameColumn.setCellValueFactory(new PropertyValueFactory<>("surrname"));
-        identityColumn.setCellValueFactory(new PropertyValueFactory<>("ewidential"));
+        surrnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
+        identityColumn.setCellValueFactory(new PropertyValueFactory<>("evidential"));
         peselColumn.setCellValueFactory(new PropertyValueFactory<>("pesel"));
         standingColumn.setCellValueFactory(new PropertyValueFactory<>("policemanDepartment"));
     }

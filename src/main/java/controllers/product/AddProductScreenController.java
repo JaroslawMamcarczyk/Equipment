@@ -16,9 +16,9 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import product.Product;
-import product.ProductDao;
+import Dao.productDao.ProductDao;
 import product.ProductGroup;
-import product.ProductGroupDao;
+import Dao.productDao.ProductGroupDao;
 
 import java.io.IOException;
 import java.math.BigDecimal;

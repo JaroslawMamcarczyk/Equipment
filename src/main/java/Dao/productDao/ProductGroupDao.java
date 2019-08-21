@@ -1,13 +1,16 @@
-package product;
+package Dao.productDao;
 
 import Dao.DBConnect;
+import building.Room;
 import interfaces.DatabaseDao;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import product.ProductGroup;
 
 import java.util.List;
 
-public class ProductDao implements DatabaseDao {
+public class ProductGroupDao implements DatabaseDao {
+
     @Override
     public void save(Object entity) {
         Session session = DBConnect.getSession();
@@ -26,7 +29,7 @@ public class ProductDao implements DatabaseDao {
     public void delete(int id) {
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery("delete from Product where id= :id");
+        Query query = session.createQuery("delete from ProductGroup where id= :id");
         query.setParameter("id",id).executeUpdate();
         session.getTransaction().commit();
         DBConnect.closeSession();
@@ -36,7 +39,7 @@ public class ProductDao implements DatabaseDao {
     public Object findByYd(int id) {
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery(" from Product where id=:id");
+        Query query = session.createQuery(" from ProductGroup  where id=:id");
         query.setParameter("id",id).executeUpdate();
         session.getTransaction().commit();
         DBConnect.closeSession();
@@ -49,12 +52,12 @@ public class ProductDao implements DatabaseDao {
     }
 
     @Override
-    public List<Product> getList() {
+    public List<ProductGroup> getList() {
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM Product ");
+        Query query = session.createQuery("FROM ProductGroup ");
         session.getTransaction().commit();
-        List<Product> list = query.list();
+        List<ProductGroup> list = query.list();
         DBConnect.closeSession();
         return list;
     }

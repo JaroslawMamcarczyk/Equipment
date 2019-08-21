@@ -29,11 +29,11 @@
       <Button layoutX="194.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickCancelDepartment" text="Usuń" />
       <Button layoutX="459.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickCancelRank" text="Usuń" />
       <Button layoutX="381.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickEditRank" text="Edytuj" />
-      <TableView layoutX="548.0" layoutY="88.0" prefHeight="564.0" prefWidth="413.0">
+      <TableView fx:id="tableWorker" layoutX="548.0" layoutY="88.0" prefHeight="564.0" prefWidth="413.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Imię" />
-          <TableColumn prefWidth="75.0" text="Nazwisko" />
-            <TableColumn prefWidth="122.0" text="nr. ewidencyjny" />
+          <TableColumn fx:id="columnName" prefWidth="75.0" text="Imię" />
+          <TableColumn fx:id="columnSurname" prefWidth="75.0" text="Nazwisko" />
+            <TableColumn fx:id="columnEvidential" prefWidth="122.0" text="nr. ewidencyjny" />
         </columns>
       </TableView>
       <TableView fx:id="tableRange" layoutX="1008.0" layoutY="88.0" prefHeight="564.0" prefWidth="292.0">
@@ -42,8 +42,10 @@
           <TableColumn fx:id="columnPagons" prefWidth="75.0" text="Pagony" />
         </columns>
       </TableView>
-      <Button layoutX="1008.0" layoutY="652.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="1122.0" layoutY="652.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="1235.0" layoutY="652.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="1008.0" layoutY="652.0" mnemonicParsing="false" text="Dodaj" />
+      <Button layoutX="1122.0" layoutY="652.0" mnemonicParsing="false" text="Edytuj" />
+      <Button layoutX="1235.0" layoutY="652.0" mnemonicParsing="false" text="Usuń" />
+      <Label layoutX="559.0" layoutY="28.0" prefHeight="49.0" prefWidth="203.0" text="Pracownicy" />
+      <Label layoutX="1006.0" layoutY="28.0" prefHeight="49.0" prefWidth="165.0" text="Rangi" />
    </children>
 </AnchorPane>

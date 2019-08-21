@@ -7,6 +7,7 @@ import building.Room;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table
@@ -37,7 +38,8 @@ public class Product implements Serializable {
       private Room roomNumber;
     @Column
     private String comments;
-
+    @OneToMany(mappedBy="product")
+    private Set<ProductTransfer> productTransfers;
     @OneToOne(cascade= CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn
     private ComputerDetails computerDetails;

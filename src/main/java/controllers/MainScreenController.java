@@ -22,7 +22,7 @@ public class MainScreenController {
     private AnchorPane anchorGeneral;
     @FXML
     private Menu menuEditBuilding;
-    private MenuItem editBuildingMenu = new MenuItem("Edytuj budynki");
+  //  private MenuItem editBuildingMenu = new MenuItem("Edytuj budynki");
     @FXML
     private Menu menuShowBuilding;
     @FXML
@@ -31,8 +31,12 @@ public class MainScreenController {
     ImageView imageView;
     private static Building kindOfbuilding = null;
     private BooleanProperty isNewBuilding = new SimpleBooleanProperty(false);
+    private static MainScreenController mainScreenController;
+
+    public static MainScreenController getMainScreenController(){ return mainScreenController;}
 
     public void initialize() {
+        mainScreenController = this;
         BuildingDao buildingDao = new BuildingDao();
         isNewBuilding.addListener(observable -> {
             if(isNewBuilding.get()==true){
@@ -79,16 +83,16 @@ public class MainScreenController {
         }
     }
 
-    private void createCenterPane (String path){
+    public  void createCenterPane (String path){
             Pane centerPane;
             try {
                 centerPane = FXMLLoader.load(getClass().getResource(path));
                 anchorGeneral.getChildren().clear();
                 anchorGeneral.getChildren().add(centerPane);
-                anchorGeneral.setRightAnchor(centerPane, 5.0);
-                anchorGeneral.setLeftAnchor(centerPane, 5.0);
-                anchorGeneral.setBottomAnchor(centerPane, 5.0);
-                anchorGeneral.setTopAnchor(centerPane, 5.0);
+                AnchorPane.setRightAnchor(centerPane, 5.0);
+                AnchorPane.setLeftAnchor(centerPane, 5.0);
+                AnchorPane.setBottomAnchor(centerPane, 5.0);
+                AnchorPane.setTopAnchor(centerPane, 5.0);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -128,7 +132,10 @@ createCenterPane("/FXML/product/ProductScreen.fxml");
 
     @FXML
     void clickConfiguration(){
-        System.out.println("Dzoalajkurwa");
         createCenterPane("/FXML/ConfigurationDepartmentScreen.fxml");
+    }
+    @FXML
+    void clickTransfer(){
+        createCenterPane("/FXML/product/transferScreen.fxml");
     }
 }

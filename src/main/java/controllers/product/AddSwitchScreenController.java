@@ -13,7 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import product.ComputerSwitch;
 import product.Product;
-import product.ProductDao;
+import Dao.productDao.ProductDao;
 
 public class AddSwitchScreenController {
     @FXML

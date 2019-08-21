@@ -1,5 +1,7 @@
 package controllers.product;
 
+import Dao.productDao.ProductDao;
+import Dao.productDao.ProductGroupDao;
 import Dao.productDao.SwitchDao;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;

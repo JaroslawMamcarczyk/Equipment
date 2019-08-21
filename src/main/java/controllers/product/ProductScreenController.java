@@ -8,7 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;
 import product.Product;
-import product.ProductDao;
+import Dao.productDao.ProductDao;
 
 import java.math.BigDecimal;
 

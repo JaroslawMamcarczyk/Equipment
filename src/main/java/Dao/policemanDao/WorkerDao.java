@@ -4,6 +4,7 @@ import Dao.DBConnect;
 import interfaces.DatabaseDao;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import policeman.Department;
 import policeman.Worker;
 
 import java.util.List;
@@ -23,11 +24,11 @@ public class WorkerDao implements DatabaseDao {
         Worker worker = (Worker) entity;
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery("UPDATE Worker  set name=:name, surrname=:surrname, pesel=:pesel, ewidential=:ewidential where id=:id");
+        Query query = session.createQuery("UPDATE Worker  set name=:name, surname=:surrname, pesel=:pesel, evidential=:ewidential where id=:id");
         query.setParameter("name", worker.getName());
-        query.setParameter("surrname",worker.getSurrname());
+        query.setParameter("surrname",worker.getSurname());
         query.setParameter("pesel", worker.getPesel());
-        query.setParameter("ewidential", worker.getEwidential());
+        query.setParameter("ewidential", worker.getEvidential());
         query.setParameter("id",worker.getId());
         query.executeUpdate();
         session.getTransaction().commit();
@@ -75,6 +76,16 @@ public class WorkerDao implements DatabaseDao {
         Session session = DBConnect.getSession();
         session.beginTransaction();
         Query query = session.createQuery("FROM Worker worker WHERE worker.isActiv=false");
+        session.getTransaction().commit();
+        List<Worker> list = query.list();
+        DBConnect.closeSession();
+        return list;
+    }
+    public List<Worker> getListInDepartment(Department department) {
+        Session session = DBConnect.getSession();
+        session.beginTransaction();
+        Query query = session.createQuery("FROM Worker worker WHERE worker.policemanDepartment=:department");
+        query.setParameter("department", department);
         session.getTransaction().commit();
         List<Worker> list = query.list();
         DBConnect.closeSession();

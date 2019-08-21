@@ -1,5 +1,7 @@
 import Dao.policemanDao.RangeDao;
 import Dao.policemanDao.WorkerDao;
+import Dao.productDao.ProductDao;
+import Dao.productDao.ProductGroupDao;
 import Dao.productDao.SwitchDao;
 import building.Building;
 import building.BuildingDao;
