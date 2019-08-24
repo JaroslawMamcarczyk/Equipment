@@ -1,6 +1,6 @@
 package controllers;
 
-import Dao.policemanDao.RangeDao;
+import Dao.buildingDao.BuildingDao;
 import building.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -9,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;
@@ -45,10 +44,7 @@ public class MainScreenController {
             }
         });
         menuItemAddProduct.setOnAction(click-> createCenterPane("/FXML/product/AddProductScreen.fxml"));
-        RoomDao roomDao = new RoomDao();
         createMenuBuilding(buildingDao);
-        RangeDao rangeDao = new RangeDao();
-        imageView.setImage(new Image(rangeDao.getList().get(16).getPath()));
     }
 
     private void createMenuBuilding(BuildingDao buildingDao) {
@@ -70,12 +66,12 @@ public class MainScreenController {
             MenuItem menuItemEdit = new MenuItem(building1.getName());
             menuItem.setOnAction(click -> {
                         kindOfbuilding = building1;
-                        createCenterPane("/FXML/BuildingScreen.fxml");
+                        createCenterPane("/FXML/building/BuildingScreen.fxml");
                     }
             );
             menuItemEdit.setOnAction(click-> {
                 kindOfbuilding=building1;
-                        createCenterPane("/FXML/EditBuildingScreen.fxml");
+                        createCenterPane("/FXML/building/EditBuildingScreen.fxml");
                     }
             );
             menuEditBuilding.getItems().add(menuItemEdit);

@@ -38,7 +38,7 @@ public class Product implements Serializable {
       private Room roomNumber;
     @Column
     private String comments;
-    @OneToMany(mappedBy="product")
+    @ManyToMany(mappedBy="products")
     private Set<ProductTransfer> productTransfers;
     @OneToOne(cascade= CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn
@@ -48,6 +48,10 @@ public class Product implements Serializable {
     private ComputerSwitch computerSwitch;
     @OneToOne(mappedBy = "productOnSocket")
     private ComputerSwitch socketFromSwitch;
+    @Column
+    private Integer positionX;
+    @Column
+    private Integer PositionY;
     public Product() {
     }
 
@@ -155,6 +159,46 @@ public class Product implements Serializable {
         this.socketFromSwitch = socketFromSwitch;
     }
 
+    public Set<ProductTransfer> getProductTransfers() {
+        return productTransfers;
+    }
+
+    public void setProductTransfers(Set<ProductTransfer> productTransfers) {
+        this.productTransfers = productTransfers;
+    }
+
+    public ComputerDetails getComputerDetails() {
+        return computerDetails;
+    }
+
+    public void setComputerDetails(ComputerDetails computerDetails) {
+        this.computerDetails = computerDetails;
+    }
+
+    public ComputerSwitch getComputerSwitch() {
+        return computerSwitch;
+    }
+
+    public void setComputerSwitch(ComputerSwitch computerSwitch) {
+        this.computerSwitch = computerSwitch;
+    }
+
+    public Integer getPositionX() {
+        return positionX;
+    }
+
+    public void setPositionX(Integer positionX) {
+        this.positionX = positionX;
+    }
+
+    public Integer getPositionY() {
+        return PositionY;
+    }
+
+    public void setPositionY(Integer positionY) {
+        PositionY = positionY;
+    }
+
     public Product(String productName, String serialNumber, ProductKind productKind, String inventoryNumber, String evidentialNumber, BigDecimal price, int productionYear, ProductGroup productGroup, String comments, Room room) {
         this.productName = productName;
         this.serialNumber = serialNumber;
@@ -166,6 +210,8 @@ public class Product implements Serializable {
         this.comments = comments;
         this.roomNumber = room;
         this.kind = productKind;
+        this.positionX = null;
+        this.PositionY = null;
     }
 
     @Override

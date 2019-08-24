@@ -1,9 +1,8 @@
-package controllers;
+package controllers.building;
 
-import building.BuildingDao;
+import Dao.buildingDao.BuildingDao;
 import building.Room;
-import building.RoomDao;
-import javafx.collections.FXCollections;
+import Dao.buildingDao.RoomDao;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -124,7 +123,7 @@ public class EditBuildingScreenController {
         button.setOnMouseClicked(mouseEvent -> {
             AnchorPane anchorPane = null;
             try {
-                anchorPane = FXMLLoader.load(getClass().getResource("/FXML/AddRoomScreen.fxml"));
+                anchorPane = FXMLLoader.load(getClass().getResource("/FXML/building/AddRoomScreen.fxml"));
             } catch (IOException e) {
                 e.printStackTrace();
             }

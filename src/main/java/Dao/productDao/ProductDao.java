@@ -1,6 +1,7 @@
 package Dao.productDao;
 
 import Dao.DBConnect;
+import building.Room;
 import interfaces.DatabaseDao;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -30,7 +31,18 @@ public class ProductDao implements DatabaseDao {
 //        query.executeUpdate();
 //        session.getTransaction().commit();
 //        DBConnect.closeSession();
+    }
 
+    public void updatePosition(Product product){
+        Session session = DBConnect.getSession();
+        session.beginTransaction();
+        Query query = session.createQuery("UPDATE Product set positionX=: posX, PositionY=:posY where id=:id");
+        query.setParameter("posX", product.getPositionX());
+        query.setParameter("posY",product.getPositionY());
+        query.setParameter("id",product.getProductId());
+        query.executeUpdate();
+        session.getTransaction().commit();
+        DBConnect.closeSession();
     }
 
     @Override
@@ -65,6 +77,16 @@ public class ProductDao implements DatabaseDao {
         session.beginTransaction();
         Query query = session.createQuery("FROM Product ");
         session.getTransaction().commit();
+        List<Product> list = query.list();
+        DBConnect.closeSession();
+        return list;
+    }
+
+    public List<Product> getListFromRoom(Room room){
+        Session session = DBConnect.getSession();
+        session.beginTransaction();
+        Query query = session.createQuery("FROM Product p where p.roomNumber =:room");
+        query.setParameter("room",room);
         List<Product> list = query.list();
         DBConnect.closeSession();
         return list;

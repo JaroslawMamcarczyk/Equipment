@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddRoomScreenController">
+<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.building.AddRoomScreenController">
    <children>
       <TextField fx:id="textFieldNumberOfRoom" layoutX="14.0" layoutY="107.0" prefHeight="31.0" prefWidth="138.0" AnchorPane.leftAnchor="10.0" />
       <TextField fx:id="textFieldDescription" layoutX="14.0" layoutY="201.0" prefHeight="31.0" prefWidth="138.0" AnchorPane.leftAnchor="10.0" />

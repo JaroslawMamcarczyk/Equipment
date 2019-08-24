@@ -1,5 +1,6 @@
 package policeman;
 
+import building.Room;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import product.ProductTransfer;
@@ -31,6 +32,8 @@ public class Department implements Serializable {
     private Set<ProductTransfer> productTransfersFrom;
     @OneToMany(mappedBy = "departmentTo")
     private Set<ProductTransfer> productTransfersTo;
+    @OneToMany(mappedBy = "department")
+    private Set<Room> rooms;
 
 
     public int getId() {

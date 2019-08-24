@@ -1,32 +1,22 @@
 package controllers.product;
 
-import building.Room;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import policeman.Department;
-import product.Product;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import product.ProductTransfer;
+
+import java.io.IOException;
+import java.time.Year;
 
 public class TransferScreenController {
 
     @FXML
     private TableColumn<ProductTransfer, String> columnInRoom;
-
-    @FXML
-    private TextArea textAreaElements;
-
-    @FXML
-    private ChoiceBox<Department> choiceDepartmentFrom;
-
-    @FXML
-    private ChoiceBox<Room> choiceRoomIn;
-
-    @FXML
-    private ChoiceBox<Department> choiceDepartmentIn;
 
     @FXML
     private TableColumn<ProductTransfer, String> columnProduct;
@@ -35,7 +25,7 @@ public class TransferScreenController {
     private TableView<ProductTransfer> tableTransfers;
 
     @FXML
-    private ChoiceBox<?> choiceYear;
+    private ChoiceBox<Year> choiceYear;
 
     @FXML
     private TableColumn<ProductTransfer, String> columnDepartmentFrom;
@@ -50,17 +40,23 @@ public class TransferScreenController {
     private TableColumn<ProductTransfer, String> columnElements;
 
     @FXML
-    private ChoiceBox<Product> choiceProduct;
+    private VBox vBoxGeneral;
 
     @FXML
-    private ChoiceBox<Room> choiceRoomFrom;
+    public void initialize() {
+        GridPane gridPane = null;
+        try {
+            gridPane = FXMLLoader.load(getClass().getResource("/FXML/product/AddproductToTransferScreen.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        vBoxGeneral.getChildren().add(gridPane);
+    }
 
-    @FXML
     void clickSave(ActionEvent event) {
 
     }
 
-    @FXML
     void clickGenerateDocument(ActionEvent event) {
 
     }

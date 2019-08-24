@@ -1,13 +1,13 @@
-package controllers;
+package controllers.building;
 
 
 import building.Room;
-import building.RoomDao;
+import Dao.buildingDao.RoomDao;
+import controllers.MainScreenController;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;

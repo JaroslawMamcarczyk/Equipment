@@ -1,8 +1,8 @@
 package controllers.product;
 import building.Building;
-import building.BuildingDao;
+import Dao.buildingDao.BuildingDao;
 import building.Room;
-import building.RoomDao;
+import Dao.buildingDao.RoomDao;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;

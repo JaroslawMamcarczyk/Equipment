@@ -12,14 +12,16 @@ import java.util.Set;
 @Table
 public class ProductTransfer implements Serializable {
 @Id
+@Column
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private int id;
 @Column
     private Year year;
 @Column
 private String elements;
-@ManyToOne
-private Product product;
+@ManyToMany
+@JoinTable(joinColumns = @JoinColumn(name = "id"),inverseJoinColumns = @JoinColumn(name = "ProductId"))
+private Set<Product> products;
 @ManyToOne
 private Room roomFrom;
 @ManyToOne
@@ -53,12 +55,12 @@ private Room roomTo;
         this.elements = elements;
     }
 
-    public Product getProduct() {
-        return product;
+    public Set<Product> getProduct() {
+        return products;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProduct(Set<Product> product) {
+        this.products = product;
     }
 
     public Room getRoomFrom() {

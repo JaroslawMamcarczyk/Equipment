@@ -1,14 +1,20 @@
-package controllers;
+package controllers.building;
 import Dao.productDao.ProductDao;
 import building.Room;
-import building.RoomDao;
+import Dao.buildingDao.RoomDao;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import product.Product;
+
+import java.io.IOException;
 import java.util.List;
 
 
@@ -16,6 +22,13 @@ public class BuildingScreenController {
     @FXML
     private StackPane stackPaneGeneral;
     RoomDao roomDao = new RoomDao();
+    private Product productDetails;
+    private static  Room roomDetails = null;
+
+    public static Room getRoomDetails() {
+        return roomDetails;
+    }
+
 
     public void initialize() {
         ProductDao productDao = new ProductDao();
@@ -28,7 +41,16 @@ public class BuildingScreenController {
             for (Room room : roomDao.getList()) {
                     AnchorPane anchorPane = new AnchorPane();
                     anchorPane.setOnMouseClicked(click->{
-                    anchorPane.setPrefSize(500,700);
+                        roomDetails = room;
+                        try {
+                            AnchorPane anchor = FXMLLoader.load(getClass().getResource("/FXML/building/DetailsRoomScreen.fxml"));
+                            Stage stage = new Stage();
+                            stage.setScene(new Scene(anchor,800,400));
+                            stage.initModality(Modality.APPLICATION_MODAL);
+                            stage.show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     });
                     anchorPane.setPrefSize(200, 300);
                     VBox vBox = new VBox();

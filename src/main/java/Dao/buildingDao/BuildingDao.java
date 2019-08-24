@@ -1,6 +1,7 @@
-package building;
+package Dao.buildingDao;
 
 import Dao.DBConnect;
+import building.Building;
 import interfaces.DatabaseDao;
 import org.hibernate.Session;
 import org.hibernate.query.Query;

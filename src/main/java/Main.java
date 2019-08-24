@@ -4,9 +4,9 @@ import Dao.productDao.ProductDao;
 import Dao.productDao.ProductGroupDao;
 import Dao.productDao.SwitchDao;
 import building.Building;
-import building.BuildingDao;
+import Dao.buildingDao.BuildingDao;
 import building.Room;
-import building.RoomDao;
+import Dao.buildingDao.RoomDao;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,7 +30,7 @@ public class Main extends Application {
         stage.setTitle("KPP Project");
         stage.setScene(new Scene(root, 1366, 768));
        // String cssPath = this.getClass().getResource("/css/mainScreenCss.css").toExternalForm();
-        //setEleemntsTesting();
+       // setEleemntsTesting();
         //createRange();
         stage.show();
     }

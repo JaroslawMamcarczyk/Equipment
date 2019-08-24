@@ -1,10 +1,10 @@
-package building;
+package Dao.buildingDao;
 
 import Dao.DBConnect;
+import building.Room;
 import interfaces.DatabaseDao;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-
 import java.util.List;
 
 public class RoomDao implements DatabaseDao {
@@ -54,7 +54,7 @@ public class RoomDao implements DatabaseDao {
         session.beginTransaction();
         Query query = session.createQuery("FROM Room ");
         session.getTransaction().commit();
-        List<Room> list = query.list();
+        List list = query.list();
         DBConnect.closeSession();
         return list;
     }

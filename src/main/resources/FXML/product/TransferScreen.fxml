@@ -6,7 +6,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="740.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.product.TransferScreenController">
    <children>
       <TableView fx:id="tableTransfers" layoutX="750.0" layoutY="56.0" prefHeight="669.0" prefWidth="607.0">
@@ -28,34 +27,7 @@
         </columns>
       </TableView>
       <Label layoutX="750.0" layoutY="21.0" text="Ruchy w sprzęcie" />
-      <VBox layoutX="22.0" layoutY="56.0" prefHeight="669.0" prefWidth="410.0" spacing="10.0">
-         <children>
-            <HBox prefHeight="33.0" prefWidth="685.0">
-               <children>
-                  <ChoiceBox fx:id="choiceProduct" prefHeight="31.0" prefWidth="458.0" />
-               </children>
-            </HBox>
-            <HBox prefHeight="27.0" prefWidth="685.0" spacing="10.0">
-               <children>
-                  <ChoiceBox fx:id="choiceRoomFrom" prefWidth="200.0" />
-                  <ChoiceBox fx:id="choiceRoomIn" prefHeight="31.0" prefWidth="200.0" />
-               </children>
-            </HBox>
-            <HBox prefHeight="32.0" prefWidth="685.0" spacing="10.0">
-               <children>
-                  <ChoiceBox fx:id="choiceDepartmentFrom" prefWidth="200.0" />
-                  <ChoiceBox fx:id="choiceDepartmentIn" prefWidth="200.0" />
-               </children>
-            </HBox>
-            <TextArea fx:id="textAreaElements" prefHeight="200.0" prefWidth="200.0" />
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#clickSave" text="Zapisz" />
-                  <Button mnemonicParsing="false" onAction="#clickGenerateDocument" text="Generuj dokument" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
+      <VBox fx:id="vBoxGeneral" layoutX="22.0" layoutY="56.0" prefHeight="669.0" prefWidth="410.0" spacing="10.0" />
       <Label layoutX="42.0" layoutY="21.0" text="nowa Transakcja" />
       <ChoiceBox fx:id="choiceYear" layoutX="1185.0" layoutY="16.0" prefWidth="150.0" />
    </children>

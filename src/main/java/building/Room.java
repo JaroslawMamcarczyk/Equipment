@@ -1,9 +1,11 @@
 package building;
 
+import policeman.Department;
 import product.ProductTransfer;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -27,6 +29,9 @@ public class Room implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Building building;
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    private Department department;
 
     @OneToMany(mappedBy="roomFrom")
     private Set<ProductTransfer> productTransfersOut;
@@ -109,6 +114,14 @@ public class Room implements Serializable {
         this.building = building;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     public Room(String number, Floor floor, Building building, int x, int y) {
         this.number = number;
         this.floor = floor;
@@ -134,4 +147,20 @@ public class Room implements Serializable {
         else
             return number;
 }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Room)) return false;
+        Room room = (Room) o;
+        return getId() == room.getId(); //&&
+         //       Objects.equals(getNumber(), room.getNumber()) &&
+        //        Objects.equals(getDescription(), room.getDescription()) &&
+       //         getFloor() == room.getFloor();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getNumber(), getDescription(), getFloor());
+    }
 }
