@@ -1,9 +1,9 @@
 package controllers;
 
 import Dao.buildingDao.BuildingDao;
-import building.*;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import Dao.buildingDao.RoomDao;
+import building.Building;
+import building.Room;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Menu;
@@ -20,64 +20,23 @@ public class MainScreenController {
     @FXML
     private AnchorPane anchorGeneral;
     @FXML
-    private Menu menuEditBuilding;
-  //  private MenuItem editBuildingMenu = new MenuItem("Edytuj budynki");
-    @FXML
-    private Menu menuShowBuilding;
-    @FXML
     private MenuItem menuItemAddProduct;
     @FXML
     ImageView imageView;
-    private static Building kindOfbuilding = null;
-    private BooleanProperty isNewBuilding = new SimpleBooleanProperty(false);
+    @FXML
+    Menu menuCalendar;
     private static MainScreenController mainScreenController;
+    private BuildingDao buildingDao = new BuildingDao();
+    private RoomDao roomDao = new RoomDao();
 
     public static MainScreenController getMainScreenController(){ return mainScreenController;}
 
     public void initialize() {
         mainScreenController = this;
-        BuildingDao buildingDao = new BuildingDao();
-        isNewBuilding.addListener(observable -> {
-            if(isNewBuilding.get()==true){
-                createMenuBuilding(buildingDao);
-                isNewBuilding.set(false);
-            }
-        });
         menuItemAddProduct.setOnAction(click-> createCenterPane("/FXML/product/AddProductScreen.fxml"));
-        createMenuBuilding(buildingDao);
+        menuCalendar.setOnAction(click->createCenterPane("/FXML/CalendarScreen.fxml"));
     }
 
-    private void createMenuBuilding(BuildingDao buildingDao) {
-        menuShowBuilding.getItems().clear();
-        menuEditBuilding.getItems().clear();
-        MenuItem menuItemCreateBuilding = new MenuItem("Stwórz budynek");
-        menuItemCreateBuilding.setOnAction(click ->{
-            TextInputDialog textInputDialog = new TextInputDialog("Podaj nazwę budynku");
-            Optional<String> result = textInputDialog.showAndWait();
-            result.ifPresent(resultFromDialog->{
-                Building buildingNew = new Building(result.get());
-                buildingDao.save(buildingNew);
-                isNewBuilding.set(true);
-            });
-        });
-        menuEditBuilding.getItems().add(menuItemCreateBuilding);
-        for (Building building1 : buildingDao.getList()) {
-            MenuItem menuItem = new MenuItem(building1.getName());
-            MenuItem menuItemEdit = new MenuItem(building1.getName());
-            menuItem.setOnAction(click -> {
-                        kindOfbuilding = building1;
-                        createCenterPane("/FXML/building/BuildingScreen.fxml");
-                    }
-            );
-            menuItemEdit.setOnAction(click-> {
-                kindOfbuilding=building1;
-                        createCenterPane("/FXML/building/EditBuildingScreen.fxml");
-                    }
-            );
-            menuEditBuilding.getItems().add(menuItemEdit);
-            menuShowBuilding.getItems().add(menuItem);
-        }
-    }
 
     public  void createCenterPane (String path){
             Pane centerPane;
@@ -92,10 +51,6 @@ public class MainScreenController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-
-        public static Building getKindOfBuilding () {
-            return kindOfbuilding;
         }
 
     @FXML
@@ -133,5 +88,20 @@ createCenterPane("/FXML/product/ProductScreen.fxml");
     @FXML
     void clickTransfer(){
         createCenterPane("/FXML/product/transferScreen.fxml");
+    }
+    @FXML
+    void clickShowBuilding(){createCenterPane("/FXML/building/EditBuildingScreen.fxml");}
+    @FXML
+    void clickCreateBuilding(){
+        TextInputDialog textInputDialog = new TextInputDialog();
+        textInputDialog.setTitle("Tworzenie Nowego Budynku");
+        textInputDialog.setContentText("Podaj nazwę budynku");
+        Optional<String> result = textInputDialog.showAndWait();
+        result.ifPresent(resultFromDialog->{
+            Building buildingNew = new Building(result.get());
+            buildingDao.save(buildingNew);
+            Room room = new Room(" ", Room.Floor.PARTER,buildingNew,1,1, Room.KindOfRoom.KORYTARZ);
+            roomDao.save(room);
+        });
     }
 }

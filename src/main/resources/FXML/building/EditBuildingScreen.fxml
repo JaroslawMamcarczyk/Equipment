@@ -6,5 +6,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<StackPane fx:id="stackPaneGeneral" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" fx:controller="controllers.building.EditBuildingScreenController" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.building.EditBuildingScreenController">
+   <children>
+      <GridPane fx:id="gridPaneGeneral" layoutX="83.0" layoutY="14.0" prefHeight="714.0" prefWidth="1249.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      </GridPane>
+      <Button fx:id="buttonEdit" layoutX="25.0" layoutY="684.0" mnemonicParsing="false" text="Edytuj" />
+      <VBox layoutX="11.0" layoutY="324.0" prefHeight="241.0" prefWidth="100.0">
+         <children>
+            <ToggleButton fx:id="buttonBasement" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" text="Piwnica" visible="false">
+               <toggleGroup>
+                  <ToggleGroup fx:id="group" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton fx:id="buttonGroundFloor" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" text="parter" toggleGroup="$group" visible="false" />
+            <ToggleButton fx:id="buttonFirstFloor" mnemonicParsing="false" text="Pierwsze piętro" toggleGroup="$group" visible="false" />
+            <ToggleButton fx:id="buttonSecondFloor" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" text="Drugie Piętro" toggleGroup="$group" visible="false" />
+            <ToggleButton fx:id="buttonThirdFloor" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" text="Trzecie piętro" toggleGroup="$group" visible="false" />
+         </children>
+      </VBox>
+      <VBox fx:id="vBoxBuilding" layoutX="14.0" layoutY="14.0" prefHeight="276.0" prefWidth="100.0" />
+   </children>
+</AnchorPane>

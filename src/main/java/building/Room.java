@@ -26,6 +26,9 @@ public class Room implements Serializable {
     @Column
     @Enumerated(EnumType.STRING)
     private Floor floor;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private KindOfRoom kindOfRoom;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Building building;
@@ -40,6 +43,10 @@ public class Room implements Serializable {
     private Set<ProductTransfer> productTransfersTo;
     public enum Floor{
         PARTER, PIWNICA, PIERWSZE, DRUGIE, TRZECIE
+    }
+
+    public enum KindOfRoom{
+        MAGAZYN, POKÓJ, KORYTARZ, SERWEROWNIA
     }
 
     public int getId() {
@@ -90,6 +97,14 @@ public class Room implements Serializable {
         this.floor = floor;
     }
 
+    public KindOfRoom getKindOfRoom() {
+        return kindOfRoom;
+    }
+
+    public void setKindOfRoom(KindOfRoom kindOfRoom) {
+        this.kindOfRoom = kindOfRoom;
+    }
+
     public int getPositionX() {
         return positionX;
     }
@@ -122,19 +137,21 @@ public class Room implements Serializable {
         this.department = department;
     }
 
-    public Room(String number, Floor floor, Building building, int x, int y) {
+    public Room(String number, Floor floor, Building building, int x, int y, KindOfRoom kindOfRoom) {
         this.number = number;
         this.floor = floor;
         this.building = building;
         this.positionX = x;
         this.positionY = y;
+        this.kindOfRoom = kindOfRoom;
     }
-    public Room(String number, Floor floor, Building building, int x, int y,String description) {
+    public Room(String number, Floor floor, Building building, int x, int y,String description,KindOfRoom kindOfRoom) {
         this.number = number;
         this.floor = floor;
         this.building = building;
         this.positionX = x;
         this.positionY = y;
+        this.kindOfRoom = kindOfRoom;
         this.description = description;
     }
     public Room(){
@@ -153,8 +170,8 @@ public class Room implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Room)) return false;
         Room room = (Room) o;
-        return getId() == room.getId(); //&&
-         //       Objects.equals(getNumber(), room.getNumber()) &&
+        return getId() == room.getId() &&
+                Objects.equals(getNumber(), room.getNumber());
         //        Objects.equals(getDescription(), room.getDescription()) &&
        //         getFloor() == room.getFloor();
     }

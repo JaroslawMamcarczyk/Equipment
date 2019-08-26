@@ -1,6 +1,7 @@
 package Dao.buildingDao;
 
 import Dao.DBConnect;
+import building.Building;
 import building.Room;
 import interfaces.DatabaseDao;
 import org.hibernate.Session;
@@ -82,11 +83,11 @@ public class RoomDao implements DatabaseDao {
         DBConnect.closeSession();
     }
 
-    public List<Room> getListRoomFromBuilding(int id) {
+    public List<Room> getListRoomFromBuilding(Building building) {
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM Room where building=:building");
-        query.setParameter("building",id);
+        Query query = session.createQuery("FROM Room room where room.building=:building");
+        query.setParameter("building",building);
         session.getTransaction().commit();
         List<Room> list = query.list();
         DBConnect.closeSession();

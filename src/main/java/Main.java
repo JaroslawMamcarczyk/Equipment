@@ -18,7 +18,8 @@ import product.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-public class Main extends Application {
+public class
+Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = null;
@@ -46,14 +47,14 @@ public class Main extends Application {
         BuildingDao buildingDao = new BuildingDao();
         Building building = new Building("KPP");
         buildingDao.save(building);
-        RoomDao roomDao = new RoomDao();
-        Room room = new Room("0", Room.Floor.PARTER,building,1,1,"Dyzurka");
-        roomDao.save(room);
+        //RoomDao roomDao = new RoomDao();
+        //Room room = new Room("0", Room.Floor.PARTER,building,1,1,"Dyzurka");
+        //roomDao.save(room);
         ProductDao productDao = new ProductDao();
-        Product product1 = new Product("Komputer HP","123", Product.ProductKind.INFORMATYKA,"123","123", BigDecimal.valueOf(23.99),2009,productGroup,"brak",room);
-        Product product2 = new Product("Switch Cisco","123", Product.ProductKind.INFORMATYKA,"123","123", BigDecimal.valueOf(23.99),2009,productGroup1,"brak",room);
-        Product product = new Product("Notebook Lenovo","123", Product.ProductKind.INFORMATYKA,"123","123", BigDecimal.valueOf(23.99),2009,productGroup2,"brak",room);
-        Product product4 = new Product("Router","123", Product.ProductKind.INFORMATYKA,"123","123", BigDecimal.valueOf(23.99),2009,productGroup1,"brak",room);
+        Product product1 = new Product("Komputer HP","123", Product.ProductKind.INFORMATYKA,"123","123", BigDecimal.valueOf(23.99),2009,productGroup,"brak",null);
+        Product product2 = new Product("Switch Cisco","123", Product.ProductKind.INFORMATYKA,"123","123", BigDecimal.valueOf(23.99),2009,productGroup1,"brak",null);
+        Product product = new Product("Notebook Lenovo","123", Product.ProductKind.INFORMATYKA,"123","123", BigDecimal.valueOf(23.99),2009,productGroup2,"brak",null);
+        Product product4 = new Product("Router","123", Product.ProductKind.INFORMATYKA,"123","123", BigDecimal.valueOf(23.99),2009,productGroup1,"brak",null);
         productDao.save(product);
         productDao.save(product1);
         productDao.save(product2);

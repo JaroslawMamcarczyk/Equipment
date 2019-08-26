@@ -19,19 +19,20 @@
             </Menu>
           <Menu mnemonicParsing="false" text="Budynki">
                <items>
-                  <Menu fx:id="menuShowBuilding" mnemonicParsing="false" text="Pokaż budynki" />
-                  <Menu fx:id="menuEditBuilding" mnemonicParsing="false" text="Edycja budynków" />
+                  <MenuItem mnemonicParsing="false" text="Pokaż Budynki" onAction="#clickShowBuilding" />
+                  <MenuItem mnemonicParsing="false" text="Stwórz Budynek" onAction="#clickCreateBuilding"/>
                </items></Menu>
             <Menu mnemonicParsing="false" text="Sprzęt">
               <items>
                   <MenuItem mnemonicParsing="false" onAction="#clickShowAllEquipment" text="Pokaż Cały sprzęt" />
-                <MenuItem fx:id="menuItemAddProduct" mnemonicParsing="false" text="Dodaj Sprzęt" />
+                 <MenuItem fx:id="menuItemAddProduct" mnemonicParsing="false" text="Dodaj Sprzęt" />
                   <MenuItem mnemonicParsing="false" onAction="#clickShowPlatform" text="Pokaż Komputery Platformowe" />
                   <MenuItem mnemonicParsing="false" onAction="#clickShowKsip" text="Pokaż Komputery KSIP" />
                   <MenuItem mnemonicParsing="false" onAction="#clickShowSwitch" text="Pokaż Switche" />
                   <MenuItem mnemonicParsing="false" onAction="#clickTransfer" text="Wykonaj transfer" />
               </items>
             </Menu>
+            <Menu fx:id="menuCalendar" mnemonicParsing="false" text="Kalendarz" />
             <Menu mnemonicParsing="false" text="Konfiguracja">
             <items>
                 <MenuItem mnemonicParsing="false" onAction="#clickConfiguration" text="Konfiguracja Departamentów" />

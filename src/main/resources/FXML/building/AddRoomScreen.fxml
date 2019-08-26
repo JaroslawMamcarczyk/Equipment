@@ -6,18 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.building.AddRoomScreenController">
+<AnchorPane prefHeight="300.0" prefWidth="245.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.building.AddRoomScreenController">
    <children>
-      <TextField fx:id="textFieldNumberOfRoom" layoutX="14.0" layoutY="107.0" prefHeight="31.0" prefWidth="138.0" AnchorPane.leftAnchor="10.0" />
-      <TextField fx:id="textFieldDescription" layoutX="14.0" layoutY="201.0" prefHeight="31.0" prefWidth="138.0" AnchorPane.leftAnchor="10.0" />
-      <Label layoutX="14.0" layoutY="74.0" text="Podaj numer pokoju:" />
-      <Label layoutX="44.0" layoutY="167.0" text="opis:" />
-      <VBox fx:id="vBoxProduct" layoutX="178.0" layoutY="67.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.rightAnchor="10.0">
-         <children>
-            <ChoiceBox fx:id="choiceBoxProduct" prefWidth="150.0" />
-         </children>
-      </VBox>
-      <Button layoutX="27.0" layoutY="240.0" fx:id="button" mnemonicParsing="false" onAction="#clickSaveRoom" text="Zapisz" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-      <Button layoutX="83.0" layoutY="259.0" mnemonicParsing="false" onAction="#clickCancelRoom" text="Anuluj" AnchorPane.bottomAnchor="10.0" />
+      <TextField fx:id="textFieldNumberOfRoom" layoutX="46.0" layoutY="35.0" prefHeight="31.0" prefWidth="138.0" AnchorPane.leftAnchor="46.0" />
+      <TextField fx:id="textFieldDescription" layoutX="46.0" layoutY="109.0" prefHeight="31.0" prefWidth="138.0" AnchorPane.leftAnchor="46.0" />
+      <Label layoutX="46.0" layoutY="14.0" text="Podaj numer pokoju:" />
+      <Label layoutX="100.0" layoutY="80.0" text="opis:" />
+      <Button fx:id="button" layoutX="41.0" layoutY="255.0" mnemonicParsing="false" onAction="#clickSaveRoom" text="Zapisz" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="41.0" />
+      <Button layoutX="131.0" layoutY="255.0" mnemonicParsing="false" onAction="#clickCancelRoom" text="Anuluj" AnchorPane.bottomAnchor="14.0" />
+      <Label layoutX="77.0" layoutY="150.0" text="Typ pokoju" />
+      <ChoiceBox fx:id="choiceBoxKindOfRoom" layoutX="41.0" layoutY="179.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
