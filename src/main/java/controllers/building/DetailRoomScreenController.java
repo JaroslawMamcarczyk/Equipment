@@ -2,16 +2,23 @@ package controllers.building;
 
 import Dao.productDao.ProductDao;
 import building.Room;
+import controllers.KitController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import product.Product;
+
+import java.io.IOException;
 
 public class DetailRoomScreenController {
         @FXML
@@ -28,6 +35,7 @@ public class DetailRoomScreenController {
         private ProductDao productDao = new ProductDao();
         private Product draggedProduct = null;
         private HBox hBoxToDelete = null;
+
      @FXML
     void initialize() {
          Room room = EditBuildingScreenController.getRoomDetails();
@@ -35,11 +43,19 @@ public class DetailRoomScreenController {
              for(int y=1;y<7;y++){
                  VBox vBox = new VBox();
                  gridPaneGeneral.add(vBox,x,y,1,1);
-                 vBox.setOnDragDropped(new EventHandler<DragEvent>() {
-                     @Override
-                     public void handle(DragEvent dragEvent) {
-                         Dragboard db = dragEvent.getDragboard();
-                         if(db.hasString()){
+                 vBox.setOnDragDropped(dragEvent -> {
+                     Dragboard db = dragEvent.getDragboard();
+                     if(db.hasString()) {
+                         if (db.getString().equals("fromKit")) {
+                             Product productFromKit = KitController.getProductToMove();
+                             vBox.getChildren().add(createRoomView(KitController.getProductToMove()));
+                             gridPaneGeneral.setGridLinesVisible(false);
+                             productFromKit.setPositionX(gridPaneGeneral.getColumnIndex(vBox));
+                             productFromKit.setPositionY(gridPaneGeneral.getRowIndex(vBox));
+                             productFromKit.setDepartment(room.getDepartment());
+                             productDao.updateBuilding(productFromKit,room);
+                             vBoxSide.getChildren().remove(hBoxToDelete);
+                         } else {
                              vBox.getChildren().add(createRoomView(draggedProduct));
                              gridPaneGeneral.setGridLinesVisible(false);
                              draggedProduct.setPositionX(gridPaneGeneral.getColumnIndex(vBox));
@@ -62,37 +78,36 @@ public class DetailRoomScreenController {
                  gridPaneGeneral.add(createRoomView(product),product.getPositionX(),product.getPositionY(),1,1);
              }
          }
-         vBoxSide.setOnDragDropped(new EventHandler<DragEvent>() {
-             @Override
-             public void handle(DragEvent dragEvent) {
-                 Dragboard db = dragEvent.getDragboard();
-                 VBox vBox = new VBox();
-                 if (db.hasString()) {
-                vBoxSide.getChildren().add(createRoomView(draggedProduct));
-                draggedProduct.setPositionY(null);
-                draggedProduct.setPositionX(null);
-                productDao.updatePosition(draggedProduct);
-                 }
+         vBoxSide.setOnDragDropped(dragEvent -> {
+             Dragboard db = dragEvent.getDragboard();
+             if (db.hasString()) {
+            vBoxSide.getChildren().add(createRoomView(draggedProduct));
+            draggedProduct.setPositionY(null);
+            draggedProduct.setPositionX(null);
+            productDao.updatePosition(draggedProduct);
              }
          });
-         vBoxSide.setOnDragOver(new EventHandler<DragEvent>() {
-             @Override
-             public void handle(DragEvent dragEvent) {
-                 if(dragEvent.getGestureSource()!=gridPaneGeneral&&dragEvent.getDragboard().hasString()){
-                     dragEvent.acceptTransferModes(TransferMode.MOVE);
-                 }
-                 dragEvent.consume();
+         vBoxSide.setOnDragOver(dragEvent -> {
+             if(dragEvent.getGestureSource()!=gridPaneGeneral&&dragEvent.getDragboard().hasString()){
+                 dragEvent.acceptTransferModes(TransferMode.MOVE);
              }
+             dragEvent.consume();
          });
-         gridPaneGeneral.setOnDragOver(new EventHandler<DragEvent>() {
-             @Override
-             public void handle(DragEvent dragEvent) {
-                 if(dragEvent.getGestureSource()!=gridPaneGeneral&&dragEvent.getDragboard().hasString()){
-                     dragEvent.acceptTransferModes(TransferMode.MOVE);
-                 }
-                 dragEvent.consume();
+         gridPaneGeneral.setOnDragOver(dragEvent -> {
+             if(dragEvent.getGestureSource()!=gridPaneGeneral&&dragEvent.getDragboard().hasString()){
+                 dragEvent.acceptTransferModes(TransferMode.MOVE);
              }
+             dragEvent.consume();
          });
+         try {
+             TabPane tabPane = FXMLLoader.load(getClass().getResource("/FXML/kit.fxml"));
+             Stage stage = new Stage();
+             stage.setScene(new Scene(tabPane,300,500));
+             stage.setX(1200);
+             stage.show();
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
      }
 
     private HBox createRoomView(Product product){
@@ -129,18 +144,15 @@ public class DetailRoomScreenController {
         }
         Label label = new Label(product.getProductName()+" "+product.getEvidentialNumber());
         hBox.getChildren().addAll(imageView,label);
-        hBox.setOnDragDetected(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                gridPaneGeneral.setGridLinesVisible(true);
-                draggedProduct = product;
-                hBoxToDelete = hBox;
-                Dragboard db = hBox.startDragAndDrop(TransferMode.ANY);
-                ClipboardContent content = new ClipboardContent();
-                content.putString(Integer.toString(product.getProductId()));
-                db.setContent(content);
-                mouseEvent.consume();
-            }
+        hBox.setOnDragDetected(mouseEvent -> {
+            gridPaneGeneral.setGridLinesVisible(true);
+            draggedProduct = product;
+            hBoxToDelete = hBox;
+            Dragboard db = hBox.startDragAndDrop(TransferMode.ANY);
+            ClipboardContent content = new ClipboardContent();
+            content.putString(Integer.toString(product.getProductId()));
+            db.setContent(content);
+            mouseEvent.consume();
         });
         return hBox;
     }

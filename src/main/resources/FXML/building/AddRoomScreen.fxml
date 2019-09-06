@@ -6,15 +6,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="300.0" prefWidth="245.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.building.AddRoomScreenController">
+<AnchorPane prefHeight="300.0" prefWidth="240.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.building.AddRoomScreenController">
    <children>
-      <TextField fx:id="textFieldNumberOfRoom" layoutX="46.0" layoutY="35.0" prefHeight="31.0" prefWidth="138.0" AnchorPane.leftAnchor="46.0" />
-      <TextField fx:id="textFieldDescription" layoutX="46.0" layoutY="109.0" prefHeight="31.0" prefWidth="138.0" AnchorPane.leftAnchor="46.0" />
-      <Label layoutX="46.0" layoutY="14.0" text="Podaj numer pokoju:" />
-      <Label layoutX="100.0" layoutY="80.0" text="opis:" />
       <Button fx:id="button" layoutX="41.0" layoutY="255.0" mnemonicParsing="false" onAction="#clickSaveRoom" text="Zapisz" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="41.0" />
       <Button layoutX="131.0" layoutY="255.0" mnemonicParsing="false" onAction="#clickCancelRoom" text="Anuluj" AnchorPane.bottomAnchor="14.0" />
-      <Label layoutX="77.0" layoutY="150.0" text="Typ pokoju" />
-      <ChoiceBox fx:id="choiceBoxKindOfRoom" layoutX="41.0" layoutY="179.0" prefWidth="150.0" />
+      <VBox alignment="CENTER" layoutX="7.0" layoutY="12.0" prefHeight="239.0" prefWidth="227.0" spacing="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <Label text="Podaj numer pokoju:" />
+            <TextField fx:id="textFieldNumberOfRoom" prefHeight="31.0" prefWidth="152.0" />
+            <Label text="opis:" />
+            <TextField fx:id="textFieldDescription" prefHeight="31.0" prefWidth="152.0" />
+            <Label text="Wydział" />
+            <ChoiceBox fx:id="choiceBoxDepartment" prefHeight="31.0" prefWidth="226.0" />
+            <Label text="Typ pokoju" />
+            <ChoiceBox fx:id="choiceBoxKindOfRoom" prefHeight="31.0" prefWidth="227.0" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

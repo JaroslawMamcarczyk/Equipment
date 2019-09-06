@@ -4,6 +4,8 @@ package product;
 
 
 import building.Room;
+import policeman.Department;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -52,6 +54,9 @@ public class Product implements Serializable {
     private Integer positionX;
     @Column
     private Integer PositionY;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+    private Department department;
     public Product() {
     }
 
@@ -153,6 +158,14 @@ public class Product implements Serializable {
 
     public ComputerSwitch getSocketFromSwitch() {
         return socketFromSwitch;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public void setSocketFromSwitch(ComputerSwitch socketFromSwitch) {

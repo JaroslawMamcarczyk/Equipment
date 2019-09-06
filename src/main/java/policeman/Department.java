@@ -3,6 +3,7 @@ package policeman;
 import building.Room;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import product.Product;
 import product.ProductTransfer;
 
 import javax.persistence.*;
@@ -34,6 +35,8 @@ public class Department implements Serializable {
     private Set<ProductTransfer> productTransfersTo;
     @OneToMany(mappedBy = "department")
     private Set<Room> rooms;
+    @OneToMany(mappedBy = "department")
+    private Set<Product> products;
 
 
     public int getId() {
@@ -74,6 +77,38 @@ public class Department implements Serializable {
 
     public void setDepartmentShort(String departmentShort) {
         this.departmentShort = departmentShort;
+    }
+
+    public Set<ProductTransfer> getProductTransfersFrom() {
+        return productTransfersFrom;
+    }
+
+    public void setProductTransfersFrom(Set<ProductTransfer> productTransfersFrom) {
+        this.productTransfersFrom = productTransfersFrom;
+    }
+
+    public Set<ProductTransfer> getProductTransfersTo() {
+        return productTransfersTo;
+    }
+
+    public void setProductTransfersTo(Set<ProductTransfer> productTransfersTo) {
+        this.productTransfersTo = productTransfersTo;
+    }
+
+    public Set<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 
     public Department(String departmentName, String departmentShort) {

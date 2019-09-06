@@ -2,19 +2,18 @@ package controllers;
 
 import Dao.buildingDao.BuildingDao;
 import Dao.buildingDao.RoomDao;
-import building.Building;
-import building.Room;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import java.io.IOException;
-import java.util.Optional;
+
 
 public class MainScreenController {
     @FXML
@@ -93,15 +92,14 @@ createCenterPane("/FXML/product/ProductScreen.fxml");
     void clickShowBuilding(){createCenterPane("/FXML/building/EditBuildingScreen.fxml");}
     @FXML
     void clickCreateBuilding(){
-        TextInputDialog textInputDialog = new TextInputDialog();
-        textInputDialog.setTitle("Tworzenie Nowego Budynku");
-        textInputDialog.setContentText("Podaj nazwę budynku");
-        Optional<String> result = textInputDialog.showAndWait();
-        result.ifPresent(resultFromDialog->{
-            Building buildingNew = new Building(result.get());
-            buildingDao.save(buildingNew);
-            Room room = new Room(" ", Room.Floor.PARTER,buildingNew,1,1, Room.KindOfRoom.KORYTARZ);
-            roomDao.save(room);
-        });
+        AnchorPane pane = new AnchorPane();
+        Stage stage = new Stage();
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/FXML/building/AddBuildingScreen.fxml"));
+            stage.setScene(new Scene(pane,300,200));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

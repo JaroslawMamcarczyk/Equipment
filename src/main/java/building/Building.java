@@ -14,7 +14,9 @@ public class Building implements Serializable {
     private int id;
     @Column
     private String name;
-    @OneToMany(mappedBy = "building")
+    @Column
+    private String countFloor;
+    @OneToMany(mappedBy = "building", fetch = FetchType.EAGER)
     private Set<Room> rooms;
 
 
@@ -34,15 +36,24 @@ public class Building implements Serializable {
         this.name = name;
     }
 
- //   public Set<Room> getRooms() {
- //       return rooms;
- //   }
+    public Set<Room> getRooms() {
+        return rooms;
+    }
 
-  //  public void setRooms(Set<Room> rooms) {
- //       this.rooms = rooms;
-  //  }
+    public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
+    }
 
-    public Building(String name) {
+    public String getCountFloor() {
+        return countFloor;
+    }
+
+    public void setCountFloor(String countFloor) {
+        this.countFloor = countFloor;
+    }
+
+    public Building(String name, String floor) {
+        this.countFloor = floor;
         this.name = name;
     }
 

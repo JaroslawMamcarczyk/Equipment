@@ -83,11 +83,12 @@ public class RoomDao implements DatabaseDao {
         DBConnect.closeSession();
     }
 
-    public List<Room> getListRoomFromBuilding(Building building) {
+    public List<Room> getListRoomFromBuilding(Building building, Room.Floor floor) {
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM Room room where room.building=:building");
+        Query query = session.createQuery("FROM Room room where room.building=:building and room.floor=:floor");
         query.setParameter("building",building);
+        query.setParameter("floor",floor );
         session.getTransaction().commit();
         List<Room> list = query.list();
         DBConnect.closeSession();

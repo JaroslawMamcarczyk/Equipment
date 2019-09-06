@@ -22,6 +22,10 @@ public class Room implements Serializable {
     @Column
     private int positionY;
     @Column
+    private int sizeX;
+    @Column
+    private int sizeY;
+    @Column
     private String description;
     @Column
     @Enumerated(EnumType.STRING)
@@ -33,7 +37,7 @@ public class Room implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Building building;
 
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne (fetch = FetchType.EAGER)
     private Department department;
 
     @OneToMany(mappedBy="roomFrom")
@@ -46,7 +50,7 @@ public class Room implements Serializable {
     }
 
     public enum KindOfRoom{
-        MAGAZYN, POKÓJ, KORYTARZ, SERWEROWNIA
+        MAGAZYN, POKÓJ, KORYTARZ, SERWEROWNIA, INNY
     }
 
     public int getId() {
@@ -87,6 +91,22 @@ public class Room implements Serializable {
 
     public void setProductTransfersTo(Set<ProductTransfer> productTransfersTo) {
         this.productTransfersTo = productTransfersTo;
+    }
+
+    public int getSizeX() {
+        return sizeX;
+    }
+
+    public void setSizeX(int sizeX) {
+        this.sizeX = sizeX;
+    }
+
+    public int getSizeY() {
+        return sizeY;
+    }
+
+    public void setSizeY(int sizeY) {
+        this.sizeY = sizeY;
     }
 
     public Floor getFloor() {
@@ -144,6 +164,8 @@ public class Room implements Serializable {
         this.positionX = x;
         this.positionY = y;
         this.kindOfRoom = kindOfRoom;
+        this.sizeX =1;
+        this.sizeY =1;
     }
     public Room(String number, Floor floor, Building building, int x, int y,String description,KindOfRoom kindOfRoom) {
         this.number = number;
@@ -153,6 +175,20 @@ public class Room implements Serializable {
         this.positionY = y;
         this.kindOfRoom = kindOfRoom;
         this.description = description;
+        this.sizeX=1;
+        this.sizeY=1;
+    }
+    public Room(String number, Floor floor, Building building, int x, int y,String description,KindOfRoom kindOfRoom, Department department) {
+        this.number = number;
+        this.floor = floor;
+        this.building = building;
+        this.positionX = x;
+        this.positionY = y;
+        this.kindOfRoom = kindOfRoom;
+        this.description = description;
+        this.sizeX=1;
+        this.sizeY=1;
+        this.department=department;
     }
     public Room(){
 
@@ -171,9 +207,8 @@ public class Room implements Serializable {
         if (!(o instanceof Room)) return false;
         Room room = (Room) o;
         return getId() == room.getId() &&
-                Objects.equals(getNumber(), room.getNumber());
-        //        Objects.equals(getDescription(), room.getDescription()) &&
-       //         getFloor() == room.getFloor();
+                Objects.equals(getNumber(), room.getNumber())&&
+                Objects.equals(getDescription(), room.getDescription());
     }
 
     @Override

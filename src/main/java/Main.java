@@ -31,8 +31,8 @@ Main extends Application {
         stage.setTitle("KPP Project");
         stage.setScene(new Scene(root, 1366, 768));
        // String cssPath = this.getClass().getResource("/css/mainScreenCss.css").toExternalForm();
-       // setEleemntsTesting();
-        //createRange();
+        //setEleemntsTesting();
+       // createRange();
         stage.show();
     }
 
@@ -44,12 +44,9 @@ Main extends Application {
         productGroupDao.save(productGroup);
         productGroupDao.save(productGroup1);
         productGroupDao.save(productGroup2);
-        BuildingDao buildingDao = new BuildingDao();
-        Building building = new Building("KPP");
-        buildingDao.save(building);
-        //RoomDao roomDao = new RoomDao();
-        //Room room = new Room("0", Room.Floor.PARTER,building,1,1,"Dyzurka");
-        //roomDao.save(room);
+        //BuildingDao buildingDao = new BuildingDao();
+        //Building building = new Building("KPP","1235");
+       // buildingDao.save(building);
         ProductDao productDao = new ProductDao();
         Product product1 = new Product("Komputer HP","123", Product.ProductKind.INFORMATYKA,"123","123", BigDecimal.valueOf(23.99),2009,productGroup,"brak",null);
         Product product2 = new Product("Switch Cisco","123", Product.ProductKind.INFORMATYKA,"123","123", BigDecimal.valueOf(23.99),2009,productGroup1,"brak",null);

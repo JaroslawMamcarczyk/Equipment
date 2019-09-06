@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.KitController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<TabPane fx:id="tabPaneGeneral" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.KitController">
+  <tabs>
+    <Tab text="Sprzęt nieprzydzielony">
+         <content>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tableViewProduct" layoutX="8.0" layoutY="154.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                    <columns>
+                      <TableColumn fx:id="columnName" prefWidth="75.0" text="Nazwa" />
+                      <TableColumn fx:id="columnEvidential" prefWidth="75.0" text="Nr. ewid." />
+                    </columns>
+                  </TableView>
+                  <HBox fx:id="hBoxMenu" layoutX="21.0" layoutY="-36.0" prefHeight="27.0" prefWidth="200.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="2.0" />
+               </children>
+            </AnchorPane>
+         </content></Tab>
+  </tabs>
+</TabPane>

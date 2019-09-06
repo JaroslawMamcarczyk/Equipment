@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.building.AddBuildingController">
+   <children>
+      <Label layoutX="25.0" layoutY="45.0" prefHeight="35.0" prefWidth="149.0" text="Podaj nazwę budynku" />
+      <TextField fx:id="textFieldName" layoutX="25.0" layoutY="85.0" />
+      <VBox layoutX="220.0" layoutY="32.0" prefHeight="137.0" prefWidth="155.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0">
+         <children>
+            <CheckBox fx:id="checkBoxBasement" mnemonicParsing="false" text="Piwnica" />
+            <CheckBox fx:id="checkBoxGroundFloor" mnemonicParsing="false" selected="true" text="Parter" />
+            <CheckBox fx:id="checkBoxFirstFloor" mnemonicParsing="false" text="Pierwsze Piętro" />
+            <CheckBox fx:id="checkBoxSecondFloor" mnemonicParsing="false" text="Drugie Piętro" />
+            <CheckBox fx:id="checkBoxThirdFloor" mnemonicParsing="false" text="Trzecie piętro" />
+         </children>
+      </VBox>
+      <Label layoutX="192.0" layoutY="14.0" prefHeight="21.0" prefWidth="203.0" text="Zaznacz które piętra posiada" />
+      <Button fx:id="buttonSave" layoutX="24.0" layoutY="141.0" mnemonicParsing="false" onAction="#clickSave" text="Zapisz" />
+      <Button layoutX="118.0" layoutY="141.0" mnemonicParsing="false" onAction="#clickCancel" text="Anuluj" />
+   </children>
+</AnchorPane>
