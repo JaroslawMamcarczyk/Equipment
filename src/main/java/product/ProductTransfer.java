@@ -19,9 +19,8 @@ private int id;
     private Year year;
 @Column
 private String elements;
-@ManyToMany
-@JoinTable(joinColumns = @JoinColumn(name = "id"),inverseJoinColumns = @JoinColumn(name = "ProductId"))
-private Set<Product> products;
+@ManyToOne
+private Product product;
 @ManyToOne
 private Room roomFrom;
 @ManyToOne
@@ -30,6 +29,8 @@ private Room roomTo;
     private Department departmentFrom;
 @ManyToOne
     private Department departmentTo;
+@ManyToOne
+private TransferDocuments transferDocument;
 
     public int getId() {
         return id;
@@ -55,12 +56,12 @@ private Room roomTo;
         this.elements = elements;
     }
 
-    public Set<Product> getProduct() {
-        return products;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProduct(Set<Product> product) {
-        this.products = product;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Room getRoomFrom() {
@@ -93,5 +94,38 @@ private Room roomTo;
 
     public void setDepartmentTo(Department departmentTo) {
         this.departmentTo = departmentTo;
+    }
+
+    public TransferDocuments getTransferDocument() {
+        return transferDocument;
+    }
+
+    public void setTransferDocument(TransferDocuments transferDocument) {
+        this.transferDocument = transferDocument;
+    }
+
+    public ProductTransfer() {
+    }
+
+    public ProductTransfer(Year year, String elements,Product products, Room roomFrom, Room roomTo, Department departmentFrom, Department departmentTo) {
+        this.year = year;
+        this.elements = elements;
+        this.product = products;
+        this.roomFrom = roomFrom;
+        this.roomTo = roomTo;
+        this.departmentFrom = departmentFrom;
+        this.departmentTo = departmentTo;
+        this.transferDocument =null;
+    }
+
+    public ProductTransfer(Year year, String elements,Product products, Room roomFrom, Room roomTo, Department departmentFrom, Department departmentTo, TransferDocuments transferDocument) {
+        this.year = year;
+        this.elements = elements;
+        this.product = products;
+        this.roomFrom = roomFrom;
+        this.roomTo = roomTo;
+        this.departmentFrom = departmentFrom;
+        this.departmentTo = departmentTo;
+        this.transferDocument = transferDocument;
     }
 }

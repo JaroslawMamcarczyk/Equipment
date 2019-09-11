@@ -1,4 +1,4 @@
-package controllers;
+package controllers.building;
 
 import Dao.buildingDao.BuildingDao;
 import Dao.productDao.ProductDao;
@@ -40,25 +40,29 @@ private TabPane tabPaneGeneral;
     private List<Product> productList = new ArrayList<>();
     private static Product productToMove = null;
     private BuildingDao buildingDao = new BuildingDao();
-public static Product getProductToMove(){return productToMove;}
+    public static Product getProductToMove(){return productToMove;}
     public void initialize(){
     productList=productDao.getList();
     createTabElement();
         settable();
         tableViewProduct.setOnDragDetected(mouseEvent -> {
             Product product = tableViewProduct.getSelectionModel().getSelectedItem();
-            if(product!=null){
-                productToMove = product;
-                Dragboard db= tableViewProduct.startDragAndDrop(TransferMode.ANY);
-                ClipboardContent content = new ClipboardContent();
-                content.putString("fromKit");
-                db.setContent(content);
-                mouseEvent.consume();
-            }
+            createDragOnTable(product);
+            mouseEvent.consume();
         });
 }
 
-private void settable(){
+    private void createDragOnTable(Product product) {
+        if(product!=null){
+            productToMove = product;
+            Dragboard db= tableViewProduct.startDragAndDrop(TransferMode.ANY);
+            ClipboardContent content = new ClipboardContent();
+            content.putString("fromKit");
+            db.setContent(content);
+        }
+    }
+
+    private void settable(){
     List<Product> productList = productDao.getListWhenRoomIsNull();
     ObservableList<Product> productObservableList = FXCollections.observableArrayList(productList);
         tableViewProduct.setItems(productObservableList);
@@ -83,6 +87,11 @@ private void createTabElement(){
         columnEvidential.setCellValueFactory(new PropertyValueFactory<>("evidentialNumber"));
         tableView.getColumns().addAll(columnName,columnEvidential);
         tableView.setItems(productObservableList);
+        tableView.setOnDragDetected(mouseEvent->{
+            Product product = tableView.getSelectionModel().getSelectedItem();
+            createDragOnTable(product);
+            mouseEvent.consume();
+        });
         tab.setContent(tableView);
         tabPaneGeneral.getTabs().add(tab);
     }

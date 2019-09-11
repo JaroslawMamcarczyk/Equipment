@@ -3,6 +3,7 @@ import Dao.buildingDao.BuildingDao;
 import Dao.buildingDao.RoomDao;
 import building.Building;
 import building.Room;
+import controllers.MainScreenController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -81,6 +82,7 @@ public class AddBuildingController {
                 roomDao.save(room);
                 Stage stage = (Stage)buttonSave.getScene().getWindow();
                 stage.close();
+                MainScreenController.getMainScreenController().createCenterPane("/FXML/building/EditBuildingScreen.fxml");
             }
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);

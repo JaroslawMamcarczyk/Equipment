@@ -22,10 +22,6 @@ public class Room implements Serializable {
     @Column
     private int positionY;
     @Column
-    private int sizeX;
-    @Column
-    private int sizeY;
-    @Column
     private String description;
     @Column
     @Enumerated(EnumType.STRING)
@@ -93,22 +89,6 @@ public class Room implements Serializable {
         this.productTransfersTo = productTransfersTo;
     }
 
-    public int getSizeX() {
-        return sizeX;
-    }
-
-    public void setSizeX(int sizeX) {
-        this.sizeX = sizeX;
-    }
-
-    public int getSizeY() {
-        return sizeY;
-    }
-
-    public void setSizeY(int sizeY) {
-        this.sizeY = sizeY;
-    }
-
     public Floor getFloor() {
         return floor;
     }
@@ -164,8 +144,6 @@ public class Room implements Serializable {
         this.positionX = x;
         this.positionY = y;
         this.kindOfRoom = kindOfRoom;
-        this.sizeX =1;
-        this.sizeY =1;
     }
     public Room(String number, Floor floor, Building building, int x, int y,String description,KindOfRoom kindOfRoom) {
         this.number = number;
@@ -175,8 +153,6 @@ public class Room implements Serializable {
         this.positionY = y;
         this.kindOfRoom = kindOfRoom;
         this.description = description;
-        this.sizeX=1;
-        this.sizeY=1;
     }
     public Room(String number, Floor floor, Building building, int x, int y,String description,KindOfRoom kindOfRoom, Department department) {
         this.number = number;
@@ -186,8 +162,6 @@ public class Room implements Serializable {
         this.positionY = y;
         this.kindOfRoom = kindOfRoom;
         this.description = description;
-        this.sizeX=1;
-        this.sizeY=1;
         this.department=department;
     }
     public Room(){

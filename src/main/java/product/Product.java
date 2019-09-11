@@ -40,7 +40,7 @@ public class Product implements Serializable {
       private Room roomNumber;
     @Column
     private String comments;
-    @ManyToMany(mappedBy="products")
+    @OneToMany(mappedBy="product")
     private Set<ProductTransfer> productTransfers;
     @OneToOne(cascade= CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn
@@ -53,7 +53,7 @@ public class Product implements Serializable {
     @Column
     private Integer positionX;
     @Column
-    private Integer PositionY;
+    private Integer positionY;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private Department department;
@@ -205,11 +205,11 @@ public class Product implements Serializable {
     }
 
     public Integer getPositionY() {
-        return PositionY;
+        return positionY;
     }
 
     public void setPositionY(Integer positionY) {
-        PositionY = positionY;
+        this.positionY = positionY;
     }
 
     public Product(String productName, String serialNumber, ProductKind productKind, String inventoryNumber, String evidentialNumber, BigDecimal price, int productionYear, ProductGroup productGroup, String comments, Room room) {
@@ -224,7 +224,7 @@ public class Product implements Serializable {
         this.roomNumber = room;
         this.kind = productKind;
         this.positionX = null;
-        this.PositionY = null;
+        this.positionY = null;
     }
 
     @Override

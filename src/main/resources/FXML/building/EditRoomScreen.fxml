@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="226.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.building.EditRoomScreenController">
+   <children>
+      <VBox layoutX="14.0" layoutY="14.0" prefHeight="212.0" prefWidth="162.0" spacing="10.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <ToggleButton mnemonicParsing="false" onAction="#clickDelete" prefHeight="31.0" prefWidth="175.0" text="Usuń pokój">
+               <toggleGroup>
+                  <ToggleGroup fx:id="group" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" onAction="#clickChangeNumber" prefHeight="31.0" prefWidth="169.0" text="Zmień numer" toggleGroup="$group" />
+            <ToggleButton mnemonicParsing="false" onAction="#clickChangeDescription" prefHeight="31.0" prefWidth="168.0" text="Zmień opis" toggleGroup="$group" />
+            <ToggleButton mnemonicParsing="false" onAction="#clickChangeDepartment" prefHeight="31.0" prefWidth="165.0" text="Zmień departament" toggleGroup="$group" />
+            <ToggleButton mnemonicParsing="false" onAction="#clickMoveRoom" prefHeight="31.0" prefWidth="163.0" text="Przesuń pokój" />
+         </children>
+      </VBox>
+      <AnchorPane fx:id="anchorPane" layoutX="188.0" layoutY="14.0" prefHeight="200.0" prefWidth="404.0" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0" />
+   </children>
+</AnchorPane>

@@ -29,8 +29,9 @@ Main extends Application {
             e.printStackTrace();
         }
         stage.setTitle("KPP Project");
-        stage.setScene(new Scene(root, 1366, 768));
-       // String cssPath = this.getClass().getResource("/css/mainScreenCss.css").toExternalForm();
+        Scene scene = new Scene(root,1366,768) ;
+        scene.getStylesheets().add("/css/MainCss.css");
+        stage.setScene(scene);
         //setEleemntsTesting();
        // createRange();
         stage.show();

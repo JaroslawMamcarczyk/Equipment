@@ -163,20 +163,29 @@ tableViewDepartment.setOnMouseClicked(click ->{
         });
     }
 @FXML
-    public void clickAddRank(){
-        TextInputDialog textInputDialog = new TextInputDialog("Podaj nazwę");
+    public void clickAddRank() {
+    TextInputDialog textInputDialog = new TextInputDialog("Podaj nazwę");
+    textInputDialog.setTitle("Dodawanie nowego Stanowiska");
+    textInputDialog.setContentText("Wpisz nazwę nowego stanowiska");
+    if (checkedDepartment != null) {
         Optional<String> result = textInputDialog.showAndWait();
-        result.ifPresent(resultFromDialog->{
+        result.ifPresent(resultFromDialog -> {
             Rank rank = new Rank(result.get(), checkedDepartment);
             rankDao.save(rank);
             isNewRank.set(true);
         });
+    }else{
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText("Nie wybrałeś/aś do jakiego departamentu manależeć nowe stanowisko ");
+        alert.setTitle("Błąd tworzenia stanowiska");
+        alert.showAndWait();
     }
+}
 
     @FXML
     public void clickEditDepartment(){
         if(checkedDepartment!=null){
-            Dialog<Pair<String,String>> dialog = new Dialog();
+            Dialog<Pair<String,String>> dialog = new Dialog<>();
             dialog.setTitle("Edycja Wydziału");
             dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK,ButtonType.CANCEL);
             TextField textFieldDepartment = new TextField(checkedDepartment.getDepartmentName());

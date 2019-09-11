@@ -1,6 +1,7 @@
 package controllers.product;
 
 import Dao.productDao.ProductDao;
+import Dao.productDao.ProductTransferDao;
 import building.Room;
 import Dao.buildingDao.RoomDao;
 import javafx.collections.FXCollections;
@@ -11,6 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import policeman.Department;
 import product.Product;
+import product.ProductTransfer;
+
+import java.time.Year;
 
 public class AddProductToTransferScreenController {
         @FXML
@@ -43,7 +47,18 @@ public class AddProductToTransferScreenController {
                 labelFromDepartment.setText(newValue.getRoomNumber().getDepartment().getDepartmentName());
             });
         }
-
+        @FXML
+public void clickSaveTransaction(){
+            Product product = choiceBoxProduct.getValue();
+            ProductTransfer productTransfer = new ProductTransfer(Year.now(),textAreaElements.getText(),product,product.getRoomNumber(),choiceBoxRoomIn.getValue(),
+                    product.getDepartment(),choiceBoxDepartmentIn.getValue());
+            product.setPositionX(0);
+            product.setPositionY(0);
+            product.setDepartment(choiceBoxDepartmentIn.getValue());
+            productDao.update(product);
+            ProductTransferDao productTransferDao = new ProductTransferDao();
+            productTransferDao.save(productTransfer);
+}
     }
 
 

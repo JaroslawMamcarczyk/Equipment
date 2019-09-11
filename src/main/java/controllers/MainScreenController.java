@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;
@@ -34,6 +35,12 @@ public class MainScreenController {
         mainScreenController = this;
         menuItemAddProduct.setOnAction(click-> createCenterPane("/FXML/product/AddProductScreen.fxml"));
         menuCalendar.setOnAction(click->createCenterPane("/FXML/CalendarScreen.fxml"));
+        ImageView imageView = new ImageView(new Image("/Pics/logo.jpg"));
+        anchorGeneral.getChildren().add(imageView);
+        anchorGeneral.setRightAnchor(imageView,20.0);
+        anchorGeneral.setLeftAnchor(imageView,300.0);
+        anchorGeneral.setBottomAnchor(imageView,20.0);
+        anchorGeneral.setTopAnchor(imageView,200.0);
     }
 
 
@@ -96,7 +103,7 @@ createCenterPane("/FXML/product/ProductScreen.fxml");
         Stage stage = new Stage();
         try {
             pane = FXMLLoader.load(getClass().getResource("/FXML/building/AddBuildingScreen.fxml"));
-            stage.setScene(new Scene(pane,300,200));
+            stage.setScene(new Scene(pane,400,300));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

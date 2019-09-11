@@ -1,9 +1,8 @@
 package controllers.building;
 
 import Dao.productDao.ProductDao;
+import Dao.productDao.ProductTransferDao;
 import building.Room;
-import controllers.KitController;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,9 +15,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import policeman.Department;
 import product.Product;
-
+import product.ProductTransfer;
 import java.io.IOException;
+import java.time.Year;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class DetailRoomScreenController {
         @FXML
@@ -35,6 +38,10 @@ public class DetailRoomScreenController {
         private ProductDao productDao = new ProductDao();
         private Product draggedProduct = null;
         private HBox hBoxToDelete = null;
+        private Set<Product> productSet = new TreeSet<>();
+        private  Room roomFrom = null;
+        private boolean isTransaction = false;
+
 
      @FXML
     void initialize() {
@@ -53,7 +60,10 @@ public class DetailRoomScreenController {
                              productFromKit.setPositionX(gridPaneGeneral.getColumnIndex(vBox));
                              productFromKit.setPositionY(gridPaneGeneral.getRowIndex(vBox));
                              productFromKit.setDepartment(room.getDepartment());
+                             roomFrom = productFromKit.getRoomNumber();
                              productDao.updateBuilding(productFromKit,room);
+                             productSet.add(productFromKit);
+                             isTransaction=true;
                              vBoxSide.getChildren().remove(hBoxToDelete);
                          } else {
                              vBox.getChildren().add(createRoomView(draggedProduct));
@@ -105,6 +115,10 @@ public class DetailRoomScreenController {
              stage.setScene(new Scene(tabPane,300,500));
              stage.setX(1200);
              stage.show();
+             stage.setOnCloseRequest(event->{
+                 if(isTransaction)
+                 saveTransfer(productSet,roomFrom,room);
+             });
          } catch (IOException e) {
              e.printStackTrace();
          }
@@ -156,4 +170,11 @@ public class DetailRoomScreenController {
         });
         return hBox;
     }
+
+    public void saveTransfer(Set<Product> product, Room roomFrom, Room roomIn){
+       // ProductTransfer productTransfer = new ProductTransfer(Year.now()," ",product,roomFrom,roomIn,roomFrom.getDepartment(),roomIn.getDepartment());
+        //ProductTransferDao productTransferDao = new ProductTransferDao();
+        //productTransferDao.save(productTransfer);
+    }
+
 }

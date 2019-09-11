@@ -27,16 +27,10 @@ public class AddRoomScreenController {
     private TextField textFieldNumberOfRoom;
     @FXML
     private ChoiceBox<Department> choiceBoxDepartment;
-    private static BooleanProperty isObjectSave = new SimpleBooleanProperty(false);
     private RoomDao roomDao = new RoomDao();
     private DepartmentDao departmentDao = new DepartmentDao();
     private Room roomFromEditBuilding = EditBuildingScreenController.getRoomToEdit();
     private List<Room> listRoom = roomDao.getListRoomFromBuilding(roomFromEditBuilding.getBuilding(), roomFromEditBuilding.getFloor());
-
-    public static BooleanProperty getIsObjectSave(){
-        return isObjectSave;
-    }
-    public static void setIsObjectSave(Boolean objectSave){ isObjectSave.set(objectSave);}
     private int toModify = EditBuildingScreenController.getRoomToModify();
 
 @FXML
@@ -64,7 +58,7 @@ public void clickSaveRoom(){
                     if(roomConflict==null){
                         roomToSave = new Room(textFieldNumberOfRoom.getText(), roomFromEditBuilding.getFloor(), roomFromEditBuilding.getBuilding(), roomFromEditBuilding.getPositionX(), roomFromEditBuilding.getPositionY()-1, description, choiceBoxKindOfRoom.getValue());
                     }else{
-                        int result = createAlertWindow(roomConflict,"Próba dodania nowego pokoju nie powiodła się. Wykryto już stworzony pokój na tej pozycji");
+                        int result = createAlertWindow(roomConflict,"Próba dodania nowego pokoju nie powiodła się. Wykryto już stworzony pokój: "+roomConflict.getNumber()+" na tej pozycji");
                         if(result==1){
                             roomToSave = new Room(textFieldNumberOfRoom.getText(), roomFromEditBuilding.getFloor(), roomFromEditBuilding.getBuilding(), roomFromEditBuilding.getPositionX(), roomFromEditBuilding.getPositionY(), description, choiceBoxKindOfRoom.getValue());
                         }else if(result==0){
@@ -81,7 +75,7 @@ public void clickSaveRoom(){
                 if(roomConflict==null) {
                     roomToSave = new Room(textFieldNumberOfRoom.getText(), roomFromEditBuilding.getFloor(), roomFromEditBuilding.getBuilding(), roomFromEditBuilding.getPositionX() + 1, roomFromEditBuilding.getPositionY(), description, choiceBoxKindOfRoom.getValue());
                 }else{
-                    int result = createAlertWindow(roomConflict,"Próba dodania nowego pokoju nie powiodła się. Wykryto już stworzony pokój na tej pozycji");
+                    int result = createAlertWindow(roomConflict,"Próba dodania nowego pokoju nie powiodła się. Wykryto już stworzony pokój: "+roomConflict.getNumber()+" na tej pozycji");
                if(result==0){
                    roomToSave = new Room(textFieldNumberOfRoom.getText(), roomFromEditBuilding.getFloor(), roomFromEditBuilding.getBuilding(), roomFromEditBuilding.getPositionX() + 1, roomFromEditBuilding.getPositionY(), description, choiceBoxKindOfRoom.getValue());
                }else if(result==1){
@@ -97,7 +91,7 @@ public void clickSaveRoom(){
                 if(roomConflict==null) {
                     roomToSave = new Room(textFieldNumberOfRoom.getText(), roomFromEditBuilding.getFloor(), roomFromEditBuilding.getBuilding(), roomFromEditBuilding.getPositionX(), roomFromEditBuilding.getPositionY() + 1, description, choiceBoxKindOfRoom.getValue());
                 }else{
-                    int result = createAlertWindow(roomConflict,"Próba dodania nowego pokoju nie powiodła się. Wykryto już stworzony pokój na tej pozycji");
+                    int result = createAlertWindow(roomConflict,"Próba dodania nowego pokoju nie powiodła się. Wykryto już stworzony pokój: "+roomConflict.getNumber()+" na tej pozycji");
                     if(result==0){
                         roomToSave = new Room(textFieldNumberOfRoom.getText(), roomFromEditBuilding.getFloor(), roomFromEditBuilding.getBuilding(), roomFromEditBuilding.getPositionX(), roomFromEditBuilding.getPositionY()+1, description, choiceBoxKindOfRoom.getValue());
                     }else if(result==1){
@@ -117,7 +111,7 @@ public void clickSaveRoom(){
                     if(roomConflict==null) {
                         roomToSave = new Room(textFieldNumberOfRoom.getText(), roomFromEditBuilding.getFloor(), roomFromEditBuilding.getBuilding(),roomFromEditBuilding.getPositionX()-1, roomFromEditBuilding.getPositionY(), description, choiceBoxKindOfRoom.getValue());
                     }else{
-                        int result = createAlertWindow(roomConflict,"Próba dodania nowego pokoju nie powiodła się. Wykryto już stworzony pokój na tej pozycji");
+                        int result = createAlertWindow(roomConflict,"Próba dodania nowego pokoju nie powiodła się. Wykryto już pokój: "+roomConflict.getNumber()+"  na tej pozycji");
                         if(result==0){
                             roomToSave = new Room(textFieldNumberOfRoom.getText(), roomFromEditBuilding.getFloor(), roomFromEditBuilding.getBuilding(), roomFromEditBuilding.getPositionX() - 1, roomFromEditBuilding.getPositionY(), description, choiceBoxKindOfRoom.getValue());
                         }else if(result==1){
@@ -135,7 +129,7 @@ public void clickSaveRoom(){
                 roomToSave.setDepartment(choiceBoxDepartment.getValue());
             }
             roomDao.save(roomToSave);
-            isObjectSave.set(true);
+            EditBuildingScreenController.setIsObjectSave(true);
         }
     }
     Stage stage = (Stage) button.getScene().getWindow();
@@ -147,7 +141,7 @@ public void clickSaveRoom(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Problem z dodaniem nowego pokoju");
         alert.setHeaderText(text);
-        alert.setContentText("Wybierz co chcesz zrobić z istniejącym pokojem");
+        alert.setContentText("Wybierz co chcesz zrobić z istniejącym pokojem "+room.getNumber());
         ButtonType moveUp = new ButtonType("Przesuń w górę");
         ButtonType moveDown = new ButtonType("Przesuń w dół");
         ButtonType moveLeft = new ButtonType("Przesuń w lewo");
@@ -165,7 +159,7 @@ public void clickSaveRoom(){
                     if (roomNext == null) {
                         roomDao.changePositionY(room.getPositionY() - 1, room.getId());
                     }else{
-                        int resultNext = createAlertWindow(roomNext,"Próba dodania nowego pokoju nie powiodła się. Wykryto już stworzony pokój na tej pozycji");
+                        int resultNext = createAlertWindow(roomNext,"Próba dodania nowego pokoju nie powiodła się. Wykryto już pokój: "+roomNext.getNumber()+" na tej pozycji");
                    if(resultNext==0){
                        roomDao.changePositionY(room.getPositionY()-1,room.getId());
                    }else if(resultNext==1){
@@ -183,7 +177,7 @@ public void clickSaveRoom(){
                     if(roomNext == null){
                         roomDao.changePositionX(room.getPositionX()+1,room.getId());
                     }else{
-                        int resultNext = createAlertWindow(roomNext,"Próba dodania nowego pokoju nie powiodła się. Wykryto już stworzony pokój na tej pozycji");
+                        int resultNext = createAlertWindow(roomNext,"Próba dodania nowego pokoju nie powiodła się. Wykryto już pokój: "+roomNext.getNumber()+" na tej pozycji");
                             roomDao.changePositionX(room.getPositionX()+1,room.getId());
                          if(resultNext==1){
                             isOk=1;
@@ -197,7 +191,7 @@ public void clickSaveRoom(){
                     if(roomNext == null){
                         roomDao.changePositionY(room.getPositionY()+1,room.getId());
                     }else{
-                      int resultNext = createAlertWindow(roomNext,"Próba dodania nowego pokoju nie powiodła się. Wykryto już stworzony pokój na tej pozycji");
+                      int resultNext = createAlertWindow(roomNext,"Próba dodania nowego pokoju nie powiodła się. Wykryto już pokój: "+roomNext.getNumber()+" na tej pozycji");
                       roomDao.changePositionY(room.getPositionY()+1,room.getId());
                       if(resultNext==1){
                           isOk=1;
@@ -215,7 +209,7 @@ public void clickSaveRoom(){
                     if (roomNext == null) {
                         roomDao.changePositionX(room.getPositionX() - 1, room.getId());
                     }else{
-                        int resultNext = createAlertWindow(roomNext,"Próba dodania nowego pokoju nie powiodła się. Wykryto już stworzony pokój na tej pozycji");
+                        int resultNext = createAlertWindow(roomNext,"Próba dodania nowego pokoju nie powiodła się. Wykryto już pokój: "+roomNext.getNumber()+" na tej pozycji");
                         if(resultNext==0){
                             roomDao.changePositionX(room.getPositionX()-1,room.getId());
                         }else if(resultNext==1){

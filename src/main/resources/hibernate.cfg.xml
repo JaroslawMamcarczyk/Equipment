@@ -38,6 +38,7 @@
         <mapping class="policeman.Worker" />
         <mapping class="policeman.Range" />
         <mapping class="product.ProductTransfer" />
+        <mapping class="product.TransferDocuments" />
 
 
 

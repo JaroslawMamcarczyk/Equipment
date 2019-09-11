@@ -1,0 +1,15 @@
+.button {
+    -fx-font: bold italic 11pt "Arial";
+    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
+}
+#anchorGeneral {
+    -fx-background-image: url("/Pics/backgrounds.jpg");
+}
+.label{
+    -fx-font-size: 13pt;
+    -fx-text-fill: red;
+}
+.toggle-button{
+    -fx-font: bold italic 9pt "Arial";
+    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
+}

@@ -21,21 +21,23 @@ public class ProductDao implements DatabaseDao {
 
     @Override
     public void update(Object entity) {
-//        Session session = DBConnect.getSession();
-//        session.beginTransaction();
-//        Query query = session.createQuery("UPDATE ComputerSwitch set switchName=: name, socket=:socket where id=:id");
-//        query.setParameter("name", computerSwitch.getSwitchName());
-//        query.setParameter("socket",computerSwitch.getSocket());
-//        query.setParameter("id",computerSwitch.getId());
-//        query.executeUpdate();
-//        session.getTransaction().commit();
-//        DBConnect.closeSession();
+        Product product = (Product) entity;
+        Session session = DBConnect.getSession();
+        session.beginTransaction();
+        Query query = session.createQuery("UPDATE Product set department=:department, positionX=:posX, positionY=:posY, building=:building where id=:id");
+        query.setParameter("department", product.getDepartment());
+        query.setParameter("posX",product.getPositionX());
+        query.setParameter("posY",product.getPositionY());
+        query.setParameter("building",product.getRoomNumber());
+       query.executeUpdate();
+        session.getTransaction().commit();
+        DBConnect.closeSession();
     }
 
     public void updatePosition(Product product){
         Session session = DBConnect.getSession();
         session.beginTransaction();
-        Query query = session.createQuery("UPDATE Product set positionX=: posX, PositionY=:posY where id=:id");
+        Query query = session.createQuery("UPDATE Product set positionX=: posX, positionY=:posY where id=:id");
         query.setParameter("posX", product.getPositionX());
         query.setParameter("posY",product.getPositionY());
         query.setParameter("id",product.getProductId());
